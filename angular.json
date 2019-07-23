@@ -24,9 +24,31 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/component.css",
+              "src/assets/css/demo.css",
+              "src/assets/css/animsition.css",
+              "src/assets/css/font-awesome.min.css",
+              "src/assets/css/ionicons.min.css",
+              "src/assets/css/linearicons.css",
+              "src/assets/css/animate.css",
+              "src/assets/css/magnific-popup.css",
+              "src/assets/css/jquery.fullPage.css",
+              "src/assets/css/jquery.pagepiling.css",
+              "src/assets/css/owl.carousel.css",
+              "src/assets/css/settings.css",
+              "src/assets/css/layers.css",
+              "src/assets/css/navigation.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "src/assets/js/jukebox-home/modernizr-custom.js",
+              "src/assets/js/jukebox-home/classie.js",
+              "src/assets/js/jukebox-home/main.js",
+              "src/assets/js/jukebox-home/run.js",
+              "src/assets/js/jukebox-login/main.js",
+              "src/assets/js/jukebox-login/map-custom.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -115,6 +137,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "jukebox"
 }
