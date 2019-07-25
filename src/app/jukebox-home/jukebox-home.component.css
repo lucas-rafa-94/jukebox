@@ -12,6 +12,48 @@ html {
   background-color: black;
 }
 
+li#escolhaFinal {
+  height: 650px;
+}
+
+button#escolherArtista {
+   margin-left: 56px;
+ }
+button#escolherMusica {
+   margin-left: 56px;
+ }
+
+button#cancelar{
+  margin-left: 86px;
+}
+
+button#confirmar{
+  margin-left: 90px;
+}
+
+
+.modal-aceite {
+  box-shadow: 0 0 25px 0 #c81854, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #c81854;
+  float: inherit;
+  background: #1c1d22;
+  width: 599px;
+  padding: 20px;
+  margin-top: 50px;
+}
+.modal-aceite .top img{
+  box-shadow: 0 0 25px 0 #c81854, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #c81854;
+  display: inline-block;
+  margin-left: 130px;
+  width: 290px;
+  height: 300px;
+  margin-top: 5px;
+  border-radius: 700px;
+  /*background: #1c1d22;*/
+}
+
+
 .icon {
   font-family: 'feather';
   font-weight: normal;

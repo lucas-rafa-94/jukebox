@@ -224,7 +224,7 @@
     this.isAnimating = true;
 
     // save "parent" menu index for back navigation
-    this.menusArr[this.menus.indexOf(subMenuEl)].backIdx = this.current_menu;
+    // this.menusArr[this.menus.indexOf(subMenuEl)].backIdx = this.current_menu;
     // save "parent" menu´s name
     this.menusArr[this.menus.indexOf(subMenuEl)].name = subMenuName;
     // current menu slides out

@@ -4,6 +4,12 @@ import {Routes, RouterModule} from '@angular/router';
 import {AppComponent} from './app.component';
 import {SocialLoginModule, AuthServiceConfig} from 'angularx-social-login';
 import {GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
+import { FormsModule } from '@angular/forms';
+import {LoginService} from './services/login/login.service';
+import {EventsService} from './services/events/events.service';
+import {SpotifyService} from './services/spotify/spotify.service';
+import {PlaylistService} from './services/playlist/playlist.service';
+import { HttpClientModule } from '@angular/common/http';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {JukeboxHomeComponent} from './jukebox-home/jukebox-home.component';
 import {DynamicScriptLoaderService} from './services/dynamicScriptLoader/dynamic-script-loader.service';
@@ -38,6 +44,8 @@ export function provideConfig() {
   ],
   imports: [
     SocialLoginModule,
+    FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(routes),
     BrowserModule
   ],
@@ -47,7 +55,7 @@ export function provideConfig() {
       provide: AuthServiceConfig,
       useFactory: provideConfig
     },
-    DynamicScriptLoaderService
+    DynamicScriptLoaderService, LoginService, EventsService, SpotifyService, PlaylistService
   ],
   bootstrap: [AppComponent]
 })

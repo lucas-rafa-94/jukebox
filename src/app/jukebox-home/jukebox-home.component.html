@@ -1,4 +1,3 @@
-
 <body>
 <!-- Main container -->
 <div class="container">
@@ -9,7 +8,7 @@
       <h2 class="dummy-heading">Jukebox's Party</h2>
     </div>
     <div class="bp-header__main">
-            <span class="bp-header__present">lab151</span>
+      <span class="bp-header__present">lab151</span>
       <img src="assets/img/jukebox_logo.png" style="height: 60px; width: 60px">
       <h1 class="bp-header__title">Jukebox's Party</h1>
     </div>
@@ -25,278 +24,182 @@
                                                   aria-owns="submenu-1" href="#">Escolha uma música</a></li>
       </ul>
       <!-- Submenu 1 -->
-      <ul data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu"
+      <ul  data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu"
           aria-label="votacao">
-        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
+        <li (click)="modifyStatePlaylistPick('rock')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
                                                   aria-owns="submenu-1-1" href="#">Rock</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
+        <li (click)="modifyStatePlaylistPick('pop')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
                                                   aria-owns="submenu-1-1" href="#">Pop</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
-                                                  aria-owns="submenu-1-1" href="#">Indie</a></li>
+        <li (click)="modifyStatePlaylistPick('indie')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
+                                                  aria-owns="submenu-1-2" href="#">Indie</a></li>
         <!--<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"-->
         <!--aria-owns="submenu-1-1" href="#">Sale %</a></li>-->
       </ul>
       <!-- Submenu 1-1 -->
       <ul data-menu="submenu-1-1" id="submenu-1-1" class="menu__level" tabindex="-1" role="menu"
           aria-label="Sale %">
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Por artista</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Por música</a></li>
+        <li class="menu__item" (click)="modifyStatePlaylistVote('artista')" role="menuitem"><a class="menu__link" href="#">Por artista</a></li>
+        <li class="menu__item" (click)="modifyStatePlaylistVote('musica')" role="menuitem"><a class="menu__link" href="#">Por música</a></li>
       </ul>
+
+
       <!-- Submenu 2 -->
       <ul data-menu="submenu-2" id="submenu-2" class="menu__level" tabindex="-1" role="menu"
           aria-label="escolha-uma-musica">
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Rock</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Indie</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Pop</a></li>
+
+        <li (click)="modifyStatePlaylistPickView('rock')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Rock</a></li>
+        <li (click)="modifyStatePlaylistPickView('indie')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Indie</a></li>
+        <li (click)="modifyStatePlaylistPickView('pop')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Pop</a></li>
         <!--<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"-->
         <!--aria-owns="submenu-1-1" href="#">Sale %</a></li>-->
       </ul>
-      <!-- Submenu 2-1 -->
-      <ul data-menu="submenu-2-1" id="submenu-2-1" class="menu__level" tabindex="-1" role="menu"
-          aria-label="Special Selection">
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Exotic Mixes</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Wild Pick</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Vitamin Boosters</a></li>
-      </ul>
-      <!-- Submenu 3 -->
-      <ul data-menu="submenu-3" id="submenu-3" class="menu__level" tabindex="-1" role="menu" aria-label="Grains">
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Buckwheat</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Millet</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Quinoa</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Wild Rice</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Durum Wheat</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-3-1"
-                                                  aria-owns="submenu-3-1" href="#">Promo Packs</a></li>
-      </ul>
-      <!-- Submenu 3-1 -->
-      <ul data-menu="submenu-3-1" id="submenu-3-1" class="menu__level" tabindex="-1" role="menu"
-          aria-label="Promo Packs">
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Starter Kit</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">The Essential 8</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Bolivian Secrets</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Flour Packs</a></li>
-      </ul>
-      <!-- Submenu 4 -->
-      <ul data-menu="submenu-4" id="submenu-4" class="menu__level" tabindex="-1" role="menu"
-          aria-label="Mylk &amp; Drinks">
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Grain Mylks</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Seed Mylks</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Nut Mylks</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Nutri Drinks</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-4-1"
-                                                  aria-owns="submenu-4-1" href="#">Selection</a></li>
-      </ul>
-      <!-- Submenu 4-1 -->
-      <ul data-menu="submenu-4-1" id="submenu-4-1" class="menu__level" tabindex="-1" role="menu"
-          aria-label="Selection">
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Nut Mylk Packs</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Amino Acid Heaven</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Allergy Free</a></li>
-      </ul>
+
     </div>
   </nav>
   <div class="content">
-    <div class="container_input">
-      <input type="text">
+    <div *ngIf="openSearchInput()">
+    <form   #formPickSearch="ngForm" (ngSubmit)="search(formPickSearch.value)">
+      <p>{{status}}</p>
+      <p>{{status2}}</p>
+    <div  class="container_input">
+      <input ngModel name="inputSearch" type="text">
       <div class="search"></div>
     </div>
-    <ul class="products">
-      <li class="product">
+    <div class="container_input">
+      <button type="submit" class="btn fourth">Buscar</button>
+    </div>
+    </form>
+      <button (click)="voltar()"   class="btn fourth">Voltar</button>
+    </div>
+
+
+
+    <!--block Escolha por Artistas-->
+    <ul  *ngIf="openArtistasTable()" id="searchArtists" class="products">
+      <li *ngFor="let artist of artists" class="product">
         <div class="top">
-          <img src="https://i.scdn.co/image/8ac42f4a08d710aa28c9cfd4e73158703a872541">
+          <img src={{artist.photoUri}}>
         </div>
         <div class="footer">
           <div class="description">
-            <p>The Strokes</p>
-            <h5>Reptilia</h5>
-            <p>Ranking <b class="ranking">1</b></p>
-            <p>Votos <b class="votos">6</b></p>
+            <p ></p>
+            <h5>Artista</h5>
+            <p id="artistName">{{artist.name}}</p>
+            <p> <b class="votos"></b></p>
           </div>
           <div class="footer btn-center">
-            <button class="btn fourth">Vote</button>
-          </div>
-        </div>
-      </li>
-      <li class="product">
-        <div class="top">
-          <img src="https://i.scdn.co/image/f1e6688873c2bba1d729288e6b0f6d1137d9777b">
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p>Arctic Monkeys</p>
-            <h5>Do I Wanna Know?</h5>
-            <p>Ranking <b class="ranking">2</b></p>
-            <p>Votos <b class="votos">4</b></p>
-          </div>
-          <div class="footer btn-center">
-            <button class="btn fourth">Vote</button>
-          </div>
-        </div>
-      </li>
-      <li class="product">
-        <div class="top">
-          <img src="https://i.scdn.co/image/2a6fef877a9b0e04a95e0cb43fb5467ad1e98c6f">
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p>Franz Ferdinand</p>
-            <h5>Take me out</h5>
-            <p>Ranking <b class="ranking">3</b></p>
-            <p>Votos <b class="votos">3</b></p>
-          </div>
-          <div class="footer btn-center">
-            <button class="btn fourth">Vote</button>
-          </div>
-        </div>
-      </li>
-      <li class="product">
-        <div class="top">
-          <img src="https://i.scdn.co/image/8ac42f4a08d710aa28c9cfd4e73158703a872541">
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p>The Strokes</p>
-            <h5>Reptilia</h5>
-            <p>Ranking <b class="ranking">1</b></p>
-            <p>Votos <b class="votos">6</b></p>
-          </div>
-          <div class="footer btn-center">
-            <button class="btn fourth">Vote</button>
-          </div>
-        </div>
-      </li>
-      <li class="product">
-        <div class="top">
-          <img src="https://i.scdn.co/image/f1e6688873c2bba1d729288e6b0f6d1137d9777b">
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p>Arctic Monkeys</p>
-            <h5>Do I Wanna Know?</h5>
-            <p>Ranking <b class="ranking">2</b></p>
-            <p>Votos <b class="votos">4</b></p>
-          </div>
-          <div class="footer btn-center">
-            <button class="btn fourth">Vote</button>
-          </div>
-        </div>
-      </li>
-      <li class="product">
-        <div class="top">
-          <img src="https://i.scdn.co/image/2a6fef877a9b0e04a95e0cb43fb5467ad1e98c6f">
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p>Franz Ferdinand</p>
-            <h5>Take me out</h5>
-            <p>Ranking <b class="ranking">3</b></p>
-            <p>Votos <b class="votos">3</b></p>
-          </div>
-          <div class="footer btn-center">
-            <button class="btn fourth">Vote</button>
-          </div>
-        </div>
-      </li>
-      <li class="product">
-        <div class="top">
-          <img src="https://i.scdn.co/image/8ac42f4a08d710aa28c9cfd4e73158703a872541">
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p>The Strokes</p>
-            <h5>Reptilia</h5>
-            <p>Ranking <b class="ranking">1</b></p>
-            <p>Votos <b class="votos">6</b></p>
-          </div>
-          <div class="footer btn-center">
-            <button class="btn fourth">Vote</button>
-          </div>
-        </div>
-      </li>
-      <li class="product">
-        <div class="top">
-          <img src="https://i.scdn.co/image/f1e6688873c2bba1d729288e6b0f6d1137d9777b">
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p>Arctic Monkeys</p>
-            <h5>Do I Wanna Know?</h5>
-            <p>Ranking <b class="ranking">2</b></p>
-            <p>Votos <b class="votos">4</b></p>
-          </div>
-          <div class="footer btn-center">
-            <button class="btn fourth">Vote</button>
-          </div>
-        </div>
-      </li>
-      <li class="product">
-        <div class="top">
-          <img src="https://i.scdn.co/image/2a6fef877a9b0e04a95e0cb43fb5467ad1e98c6f">
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p>Franz Ferdinand</p>
-            <h5>Take me out</h5>
-            <p>Ranking <b class="ranking">3</b></p>
-            <p>Votos <b class="votos">3</b></p>
-          </div>
-          <div class="footer btn-center">
-            <button class="btn fourth">Vote</button>
-          </div>
-        </div>
-      </li>
-      <li class="product">
-        <div class="top">
-          <img src="https://i.scdn.co/image/8ac42f4a08d710aa28c9cfd4e73158703a872541">
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p>The Strokes</p>
-            <h5>Reptilia</h5>
-            <p>Ranking <b class="ranking">1</b></p>
-            <p>Votos <b class="votos">6</b></p>
-          </div>
-          <div class="footer btn-center">
-            <button class="btn fourth">Vote</button>
-          </div>
-        </div>
-      </li>
-      <li class="product">
-        <div class="top">
-          <img src="https://i.scdn.co/image/f1e6688873c2bba1d729288e6b0f6d1137d9777b">
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p>Arctic Monkeys</p>
-            <h5>Do I Wanna Know?</h5>
-            <p>Ranking <b class="ranking">2</b></p>
-            <p>Votos <b class="votos">4</b></p>
-          </div>
-          <div class="footer btn-center">
-            <button class="btn fourth">Vote</button>
-          </div>
-        </div>
-      </li>
-      <li class="product">
-        <div class="top">
-          <img src="https://i.scdn.co/image/2a6fef877a9b0e04a95e0cb43fb5467ad1e98c6f">
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p>Franz Ferdinand</p>
-            <h5>Take me out</h5>
-            <p>Ranking <b class="ranking">3</b></p>
-            <p>Votos <b class="votos">3</b></p>
-          </div>
-          <div class="footer btn-center">
-            <button class="btn fourth">Vote</button>
+            <button (click)="topTracksArtist(artist)" id="escolherArtista" class="btn fourth">Escolher</button>
           </div>
         </div>
       </li>
     </ul>
 
+
+    <!--block Top Tracks Artist-->
+    <ul  *ngIf="openTopTracksArtist()"  class="products">
+      <li *ngFor="let music of musicsTopTracks" class="product">
+        <div class="top">
+          <img src={{music.photoUri}}>
+        </div>
+        <div class="footer">
+          <div class="description">
+            <p ></p>
+            <h5>Música</h5>
+            <p>{{music.name}}</p>
+            <p> <b class="votos"></b></p>
+          </div>
+          <div class="footer btn-center">
+            <button (click)="showCardFinalEscolha(music)" id="escolherMusicaTopTracks" class="btn fourth">Escolher</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <!--block Filtro Musica por artista-->
+    <ul  *ngIf="openTracksArtisFilter()"  class="products">
+      <li *ngFor="let music of musicsFilterArtist" class="product">
+        <div class="top">
+          <img src={{music.photoUri}}>
+        </div>
+        <div class="footer">
+          <div class="description">
+            <p ></p>
+            <h5>Música</h5>
+            <p>{{music.name}}</p>
+            <p> <b class="votos"></b></p>
+          </div>
+          <div class="footer btn-center">
+            <button (click)="showCardFinalEscolha(music)" id="escolherMusicaByArtist" class="btn fourth">Escolher</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <!--block Card Final Escolha-->
+    <ul *ngIf="openCardEscolha()" class="products">
+      <li id="escolhaFinal" class="product">
+        <div class="top">
+          <img src="{{fotoMusicaEscolhida}}">
+        </div>
+        <div class="footer">
+          <div class="description">
+            <p >{{artistaEscolhido}}</p>
+            <h5>Música</h5>
+            <p>{{musicEscolhida}}</p>
+            <p>Sua escolha para discotecar é essa?</p>
+          </div>
+          <div class="footer btn-center">
+            <button (click)="pickSim()"  id="confirmar" class="btn fourth">Sim</button>
+            <button (click)="pickNao()"  id="cancelar" class="btn fourth">Não</button>
+          </div>
+
+        </div>
+      </li>
+    </ul>
+
+    <!--block Musics Playlists-->
+    <ul *ngIf="openMusicPlaylistOpen()" class="products">
+      <li *ngFor="let music of musicsPlaylists; let i = index" class="product">
+        <div class="top">
+          <img src={{music.photoUri}}>
+        </div>
+        <div class="footer">
+          <div class="description">
+            <p>{{music.artist}}</p>
+            <h5>{{music.name}}</h5>
+            <p>Ranking <b class="ranking">{{i + 1}}</b></p>
+            <p>Votos <b class="votos">{{music.likes}}</b></p>
+          </div>
+          <div class="footer btn-center">
+            <button (click)="votar(music)" class="btn fourth">Vote</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+
+    <ul  *ngIf="openVoteCard()"class="products">
+      <li class="product">
+        <div class="top">
+          <img src={{musicVotedPhotoUri}}>
+        </div>
+        <div class="footer">
+          <div class="description">
+            <p>{{musicVotedArtist}}</p>
+            <h5>{{musicVotedName}}</h5>
+            <p> Certeza que irá votar nessa música?</p>
+            <!--<p> <b class="votos">{{music.likes}}</b></p>-->
+          </div>
+          <div class="footer btn-center">
+            <button (click)="voteSim()" class="btn fourth">Sim</button>
+            <button (click)="voteNao()" class="btn fourth">Não</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+
   </div>
 </div>
 
 </body>
-
