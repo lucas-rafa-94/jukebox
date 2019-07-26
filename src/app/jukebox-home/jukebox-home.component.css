@@ -19,6 +19,10 @@ li#escolhaFinal {
 button#escolherArtista {
    margin-left: 56px;
  }
+
+button#escolherPorMusica{
+  margin-left: 56px;
+}
 button#escolherMusica {
    margin-left: 56px;
  }
@@ -30,6 +34,20 @@ button#cancelar{
 button#confirmar{
   margin-left: 90px;
 }
+
+h5 {
+  font-size: 10px;
+}
+
+div#status {
+  margin-top: 30px;
+  color: aqua;
+}
+
+.btnVoltar{
+  margin-left: 39px;
+}
+
 
 
 .modal-aceite {
@@ -624,6 +642,10 @@ a:hover {
   background: #260538;
 }
 
+#status{
+  margin-left: 20px;
+}
+
 .dummy-icon {
   font-size: 4em;
 }
@@ -668,6 +690,10 @@ h5 {
   margin: 10px;
   border-radius: 5px;
   background: #1c1d22;
+}
+
+#voteCard{
+  height: 600px;
 }
 
 .product .top img{

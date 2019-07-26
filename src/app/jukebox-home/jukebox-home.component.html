@@ -5,12 +5,12 @@
   <header class="bp-header cf">
     <div class="dummy-logo">
       <img src="assets/img/jukebox_logo.png" style="height: 60px; width: 60px">
-      <h2 class="dummy-heading">Jukebox's Party</h2>
+      <h2 class="dummy-heading">Jukebox Party</h2>
     </div>
     <div class="bp-header__main">
       <span class="bp-header__present">lab151</span>
       <img src="assets/img/jukebox_logo.png" style="height: 60px; width: 60px">
-      <h1 class="bp-header__title">Jukebox's Party</h1>
+      <h1 class="bp-header__title">Jukebox Party</h1>
     </div>
   </header>
   <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
@@ -57,10 +57,15 @@
     </div>
   </nav>
   <div class="content">
-    <div *ngIf="openSearchInput()">
-    <form   #formPickSearch="ngForm" (ngSubmit)="search(formPickSearch.value)">
+    <div id="status">
       <p>{{status}}</p>
       <p>{{status2}}</p>
+    </div>
+
+    <div *ngIf="openSearchInput()">
+    <form   #formPickSearch="ngForm" (ngSubmit)="search(formPickSearch.value)">
+
+
     <div  class="container_input">
       <input ngModel name="inputSearch" type="text">
       <div class="search"></div>
@@ -69,7 +74,9 @@
       <button type="submit" class="btn fourth">Buscar</button>
     </div>
     </form>
-      <button (click)="voltar()"   class="btn fourth">Voltar</button>
+      <div class="btnVoltar">
+        <button *ngIf="byMusic()" (click)="voltar()" id="voltarBtn"  class="btn fourth">Voltar</button>
+      </div>
     </div>
 
 
@@ -178,8 +185,9 @@
     </ul>
 
 
+    <!--block Vote Card-->
     <ul  *ngIf="openVoteCard()"class="products">
-      <li class="product">
+      <li id="voteCard" class="product">
         <div class="top">
           <img src={{musicVotedPhotoUri}}>
         </div>
@@ -193,6 +201,27 @@
           <div class="footer btn-center">
             <button (click)="voteSim()" class="btn fourth">Sim</button>
             <button (click)="voteNao()" class="btn fourth">Não</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+
+    <!--block Search Music-->
+    <ul *ngIf="openSearchMusic()" class="products">
+      <li *ngFor="let music of musicsBytrack; let i = index" class="product">
+        <div class="top">
+          <img src={{music.photoUri}}>
+        </div>
+        <div class="footer">
+          <div class="description">
+            <p>{{music.artist}}</p>
+            <h5>{{music.name}}</h5>
+            <p> <b class="ranking"></b></p>
+            <p><b class="votos"></b></p>
+          </div>
+          <div class="footer btn-center">
+            <button (click)="showCardFinalEscolha(music)" id="escolherPorMusica" class="btn fourth">Escolher</button>
           </div>
         </div>
       </li>

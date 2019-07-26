@@ -27,4 +27,10 @@ export class SpotifyService {
       .set('Content-Type', 'application/json');
     return this.http.get(this.url + '/search-music/artist?name=' + artist + '&track=' + track,{headers});
   }
+
+  getTracksWithoutArtists(track) {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    return this.http.get(this.url + '/search-music/by-track?track=' + track ,{headers});
+  }
 }
