@@ -47,6 +47,7 @@
               "src/assets/js/jukebox-home/main.js",
               "src/assets/js/jukebox-home/run.js",
               "src/assets/js/jukebox-login/main.js",
+              "src/assets/js/jukebox-login/custom.js",
               "src/assets/js/jukebox-login/map-custom.js"
             ]
           },

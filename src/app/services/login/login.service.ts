@@ -22,4 +22,11 @@ export class LoginService {
       .set('Content-Type', 'application/json');
     return this.http.post(this.url + '/' + email + '/event/jukebox', '' ,{headers});
   }
+
+  createUser(payload) {
+    console.log(payload)
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    return this.http.post(this.url , payload ,{headers});
+  }
 }

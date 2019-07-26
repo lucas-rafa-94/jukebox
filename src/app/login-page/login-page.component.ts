@@ -6,16 +6,29 @@ import {FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login'
 import {SocialUser} from 'angularx-social-login';
 
 
+declare const cadastro: any;
+declare const cadastroErro: any;
+declare const loginSucesso: any;
+declare const loginErro: any;
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css']
 })
+
+
+
 export class LoginPageComponent implements OnInit {
+
+
 
   private user: SocialUser;
   private loggedIn: boolean;
   getLoginService;
+
+  loginState = true;
+  cadastroState = false;
 
   constructor(private router: Router, private authService: AuthService, private loginService: LoginService) {
     this.getLoginService = loginService;
@@ -29,32 +42,71 @@ export class LoginPageComponent implements OnInit {
   }
 
   login(form) {
-    console.log(form);
-    // Login Usuario por email & Senha
-    this.getLoginService.submitForm(form).subscribe((data) => {
-      console.log(data);
-      if (data == null) {
-        console.log('nulll');
-      } else {
-        // Se login com sucesso adiciona evento ao usuario **** atualmente fixado 'jukebox'
-        this.getLoginService.addEventUser(form.email).subscribe((data2) => {
-          localStorage.setItem('email', form.email);
-          console.log(data2);
-          this.router.navigate(['jukebox']);
-        }, (error2) => {
-
-        });
-      }
-    }, (error) => {
-
-    });
+    if(form.email !== '' && form.password !== ''){
+      console.log(form);
+      // Login Usuario por email & Senha
+      this.getLoginService.submitForm(form).subscribe((data) => {
+        console.log(data);
+        if (data == null) {
+          console.log('nulll');
+        } else {
+          // Se login com sucesso adiciona evento ao usuario **** atualmente fixado 'jukebox'
+          this.getLoginService.addEventUser(form.email).subscribe((data2) => {
+            localStorage.setItem('email', form.email);
+            console.log(data2);
+            this.router.navigate(['jukebox']);
+            loginSucesso();
+          }, (error2) => {
+            loginErro();
+          });
+        }
+      }, (error) => {
+        loginErro();
+      });
+    }else {
+      this.cadastroState = true;
+      this.loginState = false;
+    }
   }
+
+  cadastroForm(form) {
+    if(form.email !== '' && form.password !== ''){
+      this.getLoginService.createUser(form).subscribe((data) => {
+        console.log(data);
+        cadastro();
+        this.loginState = true;
+        this.cadastroState = false
+
+      }, (error2) => {
+        cadastroErro();
+      });
+    }else{
+      cadastroErro();
+    }
+  }
+
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
     console.log(this.user.email);
     console.log(this.user.name);
     this.router.navigate(['jukebox']);
+  }
+
+  loginOpen(){
+    if(this.loginState){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  cadastorOpen(){
+    if(this.cadastroState){
+      return true;
+    }else{
+      return false;
+    }
   }
 
 

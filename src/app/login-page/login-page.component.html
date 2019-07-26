@@ -1,6 +1,6 @@
 <div class="container-login100" style="background-image: url('../../assets/img/back7.png');">
   <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
-    <form #formLogin="ngForm" (ngSubmit)="login(formLogin.value)" class="login100-form validate-form">
+    <form *ngIf="loginOpen()" #formLogin="ngForm" (ngSubmit)="login(formLogin.value)" class="login100-form validate-form">
 				<span class="login100-form-title p-b-37">
 					<img src="assets/img/jukebox_logo.png" style="height: 100px; width: 100px">
           <h6 id="title">Jukebox Party</h6>
@@ -20,29 +20,35 @@
         <button type="submit" class="login100-form-btn">
           Logar
         </button>
-      </div>
-
-      <div class="text-center p-t-57 p-b-20">
-					<span id="span-login" class="txt1">
-						Ou logue com
-					</span>
-      </div>
-
-      <div class="flex-c p-b-112">
-        <a (click)="signInWithFB()"  href="#" class="login100-social-item">
-          <img src="assets/img/logo-face.png" alt="FACEBOOK">
-        </a>
-
-        <a href="#" class="login100-social-item">
-          <img src="assets/img/icon-google.png" alt="GOOGLE">
-        </a>
-      </div>
-
-      <div class="text-center">
-        <a href="#"  id="cadastro" class="txt2 hov1">
+        <button id="cadastroBtn" ngModel name="cadastroBtn" type="submit" class="login100-form-btn">
           Cadastre-se
-        </a>
+        </button>
       </div>
     </form>
+
+
+    <form *ngIf="cadastorOpen()" #formCadastro="ngForm" (ngSubmit)="cadastroForm(formCadastro.value)" class="login100-form validate-form">
+				<span class="login100-form-title p-b-37">
+					<img src="assets/img/jukebox_logo.png" style="height: 100px; width: 100px">
+          <h6 id="title">Jukebox Party</h6>
+				</span>
+
+      <div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">
+        <input ngModel class="input100" type="text" name="email" placeholder="email" >
+        <span class="focus-input100"></span>
+      </div>
+
+      <div class="wrap-input100 validate-input m-b-25" data-validate = "Enter password">
+        <input ngModel class="input100" type="password" name="password" placeholder="senha">
+        <span class="focus-input100"></span>
+      </div>
+
+      <div class="container-login100-form-btn">
+        <button type="submit" class="login100-form-btn">
+          Cadastrar
+        </button>
+      </div>
+    </form>
+
   </div>
 </div>

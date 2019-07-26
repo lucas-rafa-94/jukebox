@@ -5,6 +5,10 @@ import {SpotifyService} from './../services/spotify/spotify.service';
 import {PlaylistService} from './../services/playlist/playlist.service';
 
 declare const run: any;
+declare const pickSucesso: any;
+declare const pickErro: any;
+declare const votoSucesso: any;
+declare const votoErro: any;
 
 @Component({
   selector: 'app-jukebox-home',
@@ -225,8 +229,10 @@ export class JukeboxHomeComponent implements OnInit {
       this.modifyStatePlaylistVote(this.statePickPlaylist);
       // this.musicsTopTracks = data;
       // this.topTracksArtistOpen = true;
+      pickSucesso();
     }, (error) => {
       console.log(error);
+      pickErro();
     });
   }
 
@@ -399,12 +405,14 @@ export class JukeboxHomeComponent implements OnInit {
   voteSim(){
     this.getPlaylistService.voteMusicsOnPlaylist(this.statePickPlaylist, localStorage.getItem('email'),  this.musicVotedId).subscribe((data) => {
       console.log(data);
+      votoSucesso();
       this.voteCardOpen = false;
       this.musicPlaylistOpen = true;
       this.modifyStatePlaylistPickView(this.statePickPlaylist);
       // this.topTracksArtistOpen = true;
     }, (error) => {
       console.log(error);
+      votoErro();
     });
   }
 

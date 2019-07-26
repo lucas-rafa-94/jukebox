@@ -19,7 +19,7 @@
     <div class="menu__wrap">
       <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="Todos">
         <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-2" aria-owns="submenu-2" href="#">Votação</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Escolha uma música</a></li>
+        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Escolha sua música</a></li>
       </ul>
       <!-- Submenu 1 -->
       <ul  data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu"
@@ -30,6 +30,14 @@
                                                   aria-owns="submenu-1-1" href="#">Pop</a></li>
         <li (click)="modifyStatePlaylistPick('indie')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
                                                   aria-owns="submenu-1-2" href="#">Indie</a></li>
+        <li (click)="modifyStatePlaylistPick('funk')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
+                                                                                             aria-owns="submenu-1-2" href="#">Funk</a></li>
+        <li (click)="modifyStatePlaylistPick('80s')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
+                                                                                            aria-owns="submenu-1-2" href="#">Anos 80</a></li>
+        <li (click)="modifyStatePlaylistPick('hip-hop')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
+                                                                                           aria-owns="submenu-1-2" href="#">Hip hop</a></li>
+        <li (click)="modifyStatePlaylistPick('emo')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
+                                                                                               aria-owns="submenu-1-2" href="#">Emo</a></li>
         <!--<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"-->
         <!--aria-owns="submenu-1-1" href="#">Sale %</a></li>-->
       </ul>
@@ -48,6 +56,10 @@
         <li (click)="modifyStatePlaylistPickView('rock')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Rock</a></li>
         <li (click)="modifyStatePlaylistPickView('indie')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Indie</a></li>
         <li (click)="modifyStatePlaylistPickView('pop')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Pop</a></li>
+        <li (click)="modifyStatePlaylistPickView('funk')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Funk</a></li>
+        <li (click)="modifyStatePlaylistPickView('80s')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Anos 80</a></li>
+        <li (click)="modifyStatePlaylistPickView('hip-hop')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Hip hop</a></li>
+        <li (click)="modifyStatePlaylistPickView('emo')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Emo</a></li>
         <!--<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"-->
         <!--aria-owns="submenu-1-1" href="#">Sale %</a></li>-->
       </ul>
