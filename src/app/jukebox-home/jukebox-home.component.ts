@@ -65,11 +65,20 @@ export class JukeboxHomeComponent implements OnInit {
     this.getEventService = eventService;
     this.getSpotifyService = spotifyService;
     this.getPlaylistService = playlistService;
+    this.getTokenSession();
   }
 
   ngOnInit() {
     run();
     this.getPlaylistsFromEvent();
+  }
+
+
+  getTokenSession() {
+    console.log(localStorage.getItem('email'));
+    if (!localStorage.getItem('email') || localStorage.getItem('email') === '') {
+      this.router.navigate(['']);
+    }
   }
 
 

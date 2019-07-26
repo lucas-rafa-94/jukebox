@@ -32,6 +32,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(private router: Router, private authService: AuthService, private loginService: LoginService) {
     this.getLoginService = loginService;
+    this.getTokenSession();
   }
 
   ngOnInit() {
@@ -39,6 +40,13 @@ export class LoginPageComponent implements OnInit {
       this.user = user;
       this.loggedIn = (user != null);
     });
+  }
+
+  getTokenSession() {
+    console.log(localStorage.getItem('email'));
+    if (localStorage.getItem('email') &&  localStorage.getItem('email') !== '') {
+      this.router.navigate(['/jukebox']);
+    }
   }
 
   login(form) {
