@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class SpotifyService {
 
-  url = 'http://localhost:8080';
+  url = 'https://umcincoumproducoes.herokuapp.com';
   constructor(private http: HttpClient) { }
 
   getArtists(artist) {
