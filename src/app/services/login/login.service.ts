@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class LoginService {
 
-  url = 'http://localhost:8080/user';
+  url = 'https://umcincoumproducoes.herokuapp.com/user';
   constructor(private http: HttpClient) { }
 
   // Responsavel por logar usuario cadastrado
