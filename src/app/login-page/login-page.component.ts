@@ -50,13 +50,13 @@ export class LoginPageComponent implements OnInit {
   }
 
   login(form) {
-    if(form.email !== '' && form.password !== ''){
       console.log(form);
       // Login Usuario por email & Senha
       this.getLoginService.submitForm(form).subscribe((data) => {
         console.log(data);
         if (data == null) {
           console.log('nulll');
+          loginErro();
         } else {
           // Se login com sucesso adiciona evento ao usuario **** atualmente fixado 'jukebox'
           this.getLoginService.addEventUser(form.email).subscribe((data2) => {
@@ -71,26 +71,20 @@ export class LoginPageComponent implements OnInit {
       }, (error) => {
         loginErro();
       });
-    }else {
-      this.cadastroState = true;
-      this.loginState = false;
-    }
   }
 
-  cadastroForm(form) {
-    if(form.email !== '' && form.password !== ''){
-      this.getLoginService.createUser(form).subscribe((data) => {
+  cadastroForm(form2) {
+
+      this.getLoginService.createUser(form2).subscribe((data) => {
         console.log(data);
         cadastro();
         this.loginState = true;
-        this.cadastroState = false
+        this.cadastroState = false;
 
       }, (error2) => {
         cadastroErro();
       });
-    }else{
-      cadastroErro();
-    }
+
   }
 
 
@@ -107,6 +101,12 @@ export class LoginPageComponent implements OnInit {
     }else{
       return false;
     }
+  }
+
+  openCadastro(form){
+    form = '';
+    this.cadastroState = true;
+    this.loginState = false;
   }
 
   cadastorOpen(){

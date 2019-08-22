@@ -452,7 +452,7 @@ menu__breadcrumbs a:not(:last-child):focus::after {
 /* Main styles */
 
 body {
-  font-family: 'Avenir Next', Avenir, 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-family: 'Futura PT', sans-serif;
   overflow: hidden;
   margin: 0;
   color: #fff;
@@ -780,7 +780,7 @@ h5 {
   box-shadow: 0 0 25px 0 #c81854, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
   margin-top: 1px;
   /* text-align: center; */
-  margin-left: 80px;
+  margin-left: 60px;
   /*border-color: #f1c40f;*/
   border-color: #c81854;
   color: #c81854;
@@ -978,6 +978,53 @@ p {
 
 #logo151{
 
+}
+
+@media (min-width: 320px){
+  .products{
+    margin-left: -2.3rem;
+  }
+  #buscar{
+    margin-left: 5rem;
+    margin-top: 10px;
+  }
+  #voltarBtn{
+    margin-left: 2.7rem;
+    margin-top: 10px;
+  }
+}
+
+
+
+@media (min-width: 375px){
+  .products{
+    margin-left: -0.5rem;
+  }
+  #buscar{
+    margin-left: 6.7rem;
+    margin-top: 10px;
+  }
+  #voltarBtn{
+    margin-left: 4.4rem;
+    margin-top: 10px;
+  }
+  .status{
+    margin-left: 4.4rem;
+  }
+}
+
+@media (min-width: 414px){
+  .products{
+    margin-left: 0.1rem;
+  }
+  #buscar{
+    margin-left: 8rem;
+    margin-top: 10px;
+  }
+  #voltarBtn{
+    margin-left: 5.7rem;
+    margin-top: 10px;
+  }
 }
 
 

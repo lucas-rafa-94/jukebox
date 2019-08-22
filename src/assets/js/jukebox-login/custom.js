@@ -12,7 +12,7 @@ function loginSucesso(){
 }
 
 function loginErro(){
-  alert('Erro ao efetuar login');
+  alert('Erro ao efetuar login | Senha ou email inválido!');
 }
 
 

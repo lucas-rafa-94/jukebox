@@ -74,15 +74,13 @@
 
     <div *ngIf="openSearchInput()">
     <form   #formPickSearch="ngForm" (ngSubmit)="search(formPickSearch.value)">
-
-
     <div  class="container_input">
       <input ngModel name="inputSearch" type="text">
       <div class="search"></div>
     </div>
-    <div class="container_input">
-      <button type="submit" class="btn fourth">Buscar</button>
-    </div>
+
+      <button type="submit" id="buscar" class="btn fourth">Buscar</button>
+
     </form>
       <div class="btnVoltar">
         <button *ngIf="byMusic()" (click)="voltar()" id="voltarBtn"  class="btn fourth">Voltar</button>
@@ -181,7 +179,7 @@
     <ul *ngIf="openMusicPlaylistOpen()" class="products">
       <li *ngFor="let music of musicsPlaylists; let i = index" class="product">
         <div class="top">
-          <img src={{music.uriImage}}>
+          <img src={{music.photoUri}}>
         </div>
         <div class="footer">
           <div class="description">
