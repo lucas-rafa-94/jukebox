@@ -95,7 +95,7 @@
     <ul  *ngIf="openArtistasTable()" id="searchArtists" class="products">
       <li *ngFor="let artist of artists" class="product">
         <div class="top">
-          <img src={{artist.photoUri}}>
+          <img src={{artist.uriImage}}>
         </div>
         <div class="footer">
           <div class="description">
@@ -116,13 +116,14 @@
     <ul  *ngIf="openTopTracksArtist()"  class="products">
       <li *ngFor="let music of musicsTopTracks" class="product">
         <div class="top">
-          <img src={{music.photoUri}}>
+          <img src={{music.uriImage}}>
         </div>
         <div class="footer">
           <div class="description">
-            <p ></p>
-            <h5>Música</h5>
-            <p>{{music.name}}</p>
+
+            <p>{{music.artist}}</p>
+            <p>{{music.album}}</p>
+            <h5>{{music.music}}</h5>
             <p> <b class="votos"></b></p>
           </div>
           <div class="footer btn-center">
@@ -136,13 +137,15 @@
     <ul  *ngIf="openTracksArtisFilter()"  class="products">
       <li *ngFor="let music of musicsFilterArtist" class="product">
         <div class="top">
-          <img src={{music.photoUri}}>
+          <img src={{music.uriImage}}>
         </div>
         <div class="footer">
           <div class="description">
-            <p ></p>
-            <h5>Música</h5>
-            <p>{{music.name}}</p>
+            <!--<p ></p>-->
+
+            <p>{{music.artist}}</p>
+            <p>{{music.album}}</p>
+            <h5>{{music.music}}</h5>
             <p> <b class="votos"></b></p>
           </div>
           <div class="footer btn-center">
@@ -178,7 +181,7 @@
     <ul *ngIf="openMusicPlaylistOpen()" class="products">
       <li *ngFor="let music of musicsPlaylists; let i = index" class="product">
         <div class="top">
-          <img src={{music.photoUri}}>
+          <img src={{music.uriImage}}>
         </div>
         <div class="footer">
           <div class="description">
@@ -221,12 +224,12 @@
     <ul *ngIf="openSearchMusic()" class="products">
       <li *ngFor="let music of musicsBytrack; let i = index" class="product">
         <div class="top">
-          <img src={{music.photoUri}}>
+          <img src={{music.uriImage}}>
         </div>
         <div class="footer">
           <div class="description">
             <p>{{music.artist}}</p>
-            <h5>{{music.name}}</h5>
+            <h5>{{music.music}}</h5>
             <p> <b class="ranking"></b></p>
             <p><b class="votos"></b></p>
           </div>

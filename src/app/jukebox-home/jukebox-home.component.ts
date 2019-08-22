@@ -115,6 +115,7 @@ export class JukeboxHomeComponent implements OnInit {
     this.statePickPlaylist = pick;
     this.searchOpen = true;
     if(pick === 'artista'){
+      this.getArtistsFromPlaylistPostgre();
       this.status = 'Procure um artista';
       this.musicPlaylistOpen = false;
       this.musicsBytrack = [];
@@ -151,7 +152,53 @@ export class JukeboxHomeComponent implements OnInit {
   }
 
 
-  // Search por Musica ou Artista
+  // Search por Musica ou Artista no Spotify
+
+  // search(form) {
+  //   this.searchOpen = true;
+  //   console.log(this.enterTopTracks);
+  //   if (this.statePickPlaylist === 'artista' && !this.enterTopTracks) {
+  //     console.log('Busca por artista....');
+  //     console.log(form);
+  //     this.getSpotifyService.getArtists(form.inputSearch).subscribe((data) => {
+  //       console.log(data);
+  //       this.artists = data;
+  //       this.artistasTableOpen = true;
+  //     }, (error) => {
+  //       console.log(error);
+  //     });
+  //   } else if (this.statePickPlaylist === 'artista' && this.enterTopTracks) {
+  //     this.topTracksArtistOpen = false;
+  //     this.enterFilter = true;
+  //     this.getSpotifyService.getTracksFromArtist(form.inputSearch, this.artistPicked).subscribe((data) => {
+  //       console.log(data);
+  //       this.musicsFilterArtist = data;
+  //       this.trackArtistsFilter = true;
+  //     }, (error) => {
+  //       console.log(error);
+  //     });
+  //   } else if (this.statePickPlaylist === 'musica'){
+  //     this.getSpotifyService.getTracksWithoutArtists(form.inputSearch).subscribe((data) => {
+  //       console.log(data);
+  //       this.musicsBytrack = data;
+  //       this.tableByTrackOpen = true;
+  //     }, (error) => {
+  //       console.log(error);
+  //     });
+  //   }
+  // }
+
+  getArtistsFromPlaylistPostgre(){
+    console.log(this.statePlaylist)
+    this.getSpotifyService.getArtistsByPlaylist('0ko1DVT9Z0zoWgSxPfzaly').subscribe((data) => {
+      console.log(data);
+      this.artists = data;
+      this.artistasTableOpen = true;
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
 
   search(form) {
     this.searchOpen = true;
@@ -159,17 +206,21 @@ export class JukeboxHomeComponent implements OnInit {
     if (this.statePickPlaylist === 'artista' && !this.enterTopTracks) {
       console.log('Busca por artista....');
       console.log(form);
-      this.getSpotifyService.getArtists(form.inputSearch).subscribe((data) => {
-        console.log(data);
-        this.artists = data;
-        this.artistasTableOpen = true;
-      }, (error) => {
-        console.log(error);
-      });
+      if(form.inputSearch !== '' || form.inputSearch !== null || form.inputSearch !== undefined ){
+        this.getSpotifyService.getArtistPostgree(form.inputSearch , '0ko1DVT9Z0zoWgSxPfzaly').subscribe((data) => {
+          console.log(data);
+          this.artists = data;
+          this.artistasTableOpen = true;
+        }, (error) => {
+          console.log(error);
+        });
+      }else {
+        this.getArtistsFromPlaylistPostgre();
+      }
     } else if (this.statePickPlaylist === 'artista' && this.enterTopTracks) {
       this.topTracksArtistOpen = false;
       this.enterFilter = true;
-      this.getSpotifyService.getTracksFromArtist(form.inputSearch, this.artistPicked).subscribe((data) => {
+      this.getSpotifyService.getTracksFilterByArtist( this.artistPicked, form.inputSearch, '0ko1DVT9Z0zoWgSxPfzaly').subscribe((data) => {
         console.log(data);
         this.musicsFilterArtist = data;
         this.trackArtistsFilter = true;
@@ -177,7 +228,7 @@ export class JukeboxHomeComponent implements OnInit {
         console.log(error);
       });
     } else if (this.statePickPlaylist === 'musica'){
-      this.getSpotifyService.getTracksWithoutArtists(form.inputSearch).subscribe((data) => {
+      this.getSpotifyService.getMusics(form.inputSearch, '0ko1DVT9Z0zoWgSxPfzaly').subscribe((data) => {
         console.log(data);
         this.musicsBytrack = data;
         this.tableByTrackOpen = true;
@@ -193,7 +244,7 @@ export class JukeboxHomeComponent implements OnInit {
     this.artistPicked = artist.name;
     this.artistasTableOpen = false;
     this.enterTopTracks = true;
-    this.getSpotifyService.getTopTracksArtist(artist.id).subscribe((data) => {
+    this.getSpotifyService.getTracksByArtist(artist.name, '0ko1DVT9Z0zoWgSxPfzaly').subscribe((data) => {
       console.log(data);
       this.musicsTopTracks = data;
       this.topTracksArtistOpen = true;
@@ -210,13 +261,13 @@ export class JukeboxHomeComponent implements OnInit {
     this.musicPicked = music;
     this.cardEscolhaOpen = true;
 
-    this.musicEscolhida = music.name;
+    this.musicEscolhida = music.music;
     if(this.statePickPlaylist === 'musica'){
       this.artistaEscolhido = music.artist;
     }else{
       this.artistaEscolhido = this.artistPicked;
     }
-    this.fotoMusicaEscolhida = music.photoUri;
+    this.fotoMusicaEscolhida = music.uriImage;
 
     this.topTracksArtistOpen = false;
     this.trackArtistsFilter = false;
@@ -266,17 +317,28 @@ export class JukeboxHomeComponent implements OnInit {
     if (this.cardEscolhaOpen === true && this.statePickPlaylist === 'artista' ){
       this.topTracksArtistOpen = true;
       this.cardEscolhaOpen = false;
+      console.log('aqui 1');
     }
       if (this.trackArtistsFilter === true && this.statePickPlaylist === 'artista' ){
         this.trackArtistsFilter = false;
-        this.artistasTableOpen = true;
+        this.topTracksArtistOpen = true;
         this.artists = [];
-        this.enterTopTracks = false;
+        this.enterTopTracks = true;
         this.enterFilter = false;
         this.status = 'Procure um artista';
         this.status2 = '';
+        console.log('aqui 2');
+        this.getSpotifyService.getArtistPostgree(this.artistPicked , '0ko1DVT9Z0zoWgSxPfzaly').subscribe((data) => {
+          console.log(data);
+          this.artists = data;
+          this.artistasTableOpen = true;
+        }, (error) => {
+          console.log(error);
+        });
+        this.enterTopTracks = true;
       }
       if (this.topTracksArtistOpen === true && this.statePickPlaylist === 'artista'){
+        this.getArtistsFromPlaylistPostgre();
         this.topTracksArtistOpen = false;
         this.artistasTableOpen = true;
         this.artists = [];
@@ -284,6 +346,7 @@ export class JukeboxHomeComponent implements OnInit {
         this.enterFilter = false;
         this.status = 'Procure um artista';
         this.status2 = '';
+        console.log('aqui 3');
       }
       if(this.cardEscolhaOpen === true && this.statePickPlaylist === 'musica'){
         this.cardEscolhaOpen = false;
