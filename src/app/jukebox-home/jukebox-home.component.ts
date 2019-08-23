@@ -550,12 +550,14 @@ export class JukeboxHomeComponent implements OnInit {
 
 
     this.statePickPlaylist = playlist;
-
+    this.spinnerService.show();
     this.getPlaylistService.getMusicsOnPlaylist(playlist).subscribe((data) => {
+      this.spinnerService.hide();
       console.log(data.trackSelectedModelList);
       this.musicsPlaylists = data.trackSelectedModelList;
       // this.topTracksArtistOpen = true;
     }, (error) => {
+      this.spinnerService.hide();
       console.log(error);
     });
   }
@@ -582,6 +584,7 @@ export class JukeboxHomeComponent implements OnInit {
       // this.topTracksArtistOpen = true;
     }, (error) => {
       console.log(error);
+      this.spinnerService.hide();
       votoErro();
     });
   }
@@ -615,8 +618,37 @@ export class JukeboxHomeComponent implements OnInit {
       return false;
     }
   }
+  limpar(){
+    this.status = '';
+    this.status2 = '';
+    this.naoEncontrou = false;
+    this.topTracksArtistOpen = false;
+    this.tableByTrackOpen = false;
+    this.artistasTableOpen = false;
+    this.enterTopTracks = false;
+    this.enterFilter = false;
+    this.topTracksArtistOpen = false;
+    this.artistasTableOpen = false;
+    this.searchOpen = false;
+    this.cardEscolhaOpen = false;
+    this.trackArtistsFilter = false;
+    this.musicPlaylistOpen = false;
+    this.musicPicked = null;
+    this.voteCardOpen = false;
+    this.musicVoted = null;
+    this.playlists = [];
+    this.artists = [];
+    this.musicsTopTracks = [];
+    this.musicsFilterArtist = [];
+    this.artistaEscolhido = '';
+    this.musicEscolhida = '';
+    this.fotoMusicaEscolhida = '';
+    this.musicPlaylistOpen = false;
 
+  }
   abrirNaoEncontrou(){
+    this.status = '';
+    this.status2 = '';
     this.status = 'Dê sua sugestão de música para a próxima festa :)';
     this.naoEncontrou = true;
     this.topTracksArtistOpen = false;

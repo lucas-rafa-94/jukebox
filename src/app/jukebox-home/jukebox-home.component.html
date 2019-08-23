@@ -20,8 +20,8 @@
     <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
     <div class="menu__wrap">
       <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="Todos">
-        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-2" aria-owns="submenu-2" href="#">Votação</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Escolha sua música</a></li>
+        <li class="menu__item" role="menuitem"><a class="menu__link" (click)="limpar()" data-submenu="submenu-2" aria-owns="submenu-2" href="#">Votação</a></li>
+        <li class="menu__item" role="menuitem"><a class="menu__link" (click)="limpar()" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Escolha sua música</a></li>
         <li class="menu__item" role="menuitem"><a class="menu__link" (click)="abrirNaoEncontrou()" href="#">Não achou sua música?</a></li>
       </ul>
       <!-- Submenu 1 -->

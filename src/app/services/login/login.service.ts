@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class LoginService {
 
-  url = 'http://ec2-18-231-45-109.sa-east-1.compute.amazonaws.com:8080/user';
+  url = 'http://jukebox-lab151.com.br:8080/user';
   constructor(private http: HttpClient) { }
 
   // Responsavel por logar usuario cadastrado

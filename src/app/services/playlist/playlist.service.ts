@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
   providedIn: 'root'
 })
 export class PlaylistService {
-  url = 'http://ec2-18-231-45-109.sa-east-1.compute.amazonaws.com:8080';
+  url = 'http://jukebox-lab151.com.br:8080';
   constructor(private http: HttpClient) { }
 
   putMusicOnPlaylist(playlist, payload) {
