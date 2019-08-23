@@ -9,6 +9,11 @@ declare const pickSucesso: any;
 declare const pickErro: any;
 declare const votoSucesso: any;
 declare const votoErro: any;
+declare const sugestaoSucesso: any;
+declare const sugestaoErro: any;
+declare const filtroVazio: any;
+
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-jukebox-home',
@@ -53,7 +58,7 @@ export class JukeboxHomeComponent implements OnInit {
   //estado views
   voteCardOpen = false;
   musicPlaylistOpen = false;
-
+  naoEncontrou = false;
   tableByTrackOpen = false;
   topTracksArtistOpen = false;
   artistasTableOpen = false;
@@ -61,10 +66,11 @@ export class JukeboxHomeComponent implements OnInit {
   cardEscolhaOpen = false;
   trackArtistsFilter = false;
 
-  constructor(private router: Router, private eventService: EventsService, private spotifyService: SpotifyService, private playlistService: PlaylistService) {
+  constructor(private spinnerService: NgxSpinnerService, private router: Router, private eventService: EventsService, private spotifyService: SpotifyService, private playlistService: PlaylistService) {
     this.getEventService = eventService;
     this.getSpotifyService = spotifyService;
     this.getPlaylistService = playlistService;
+    this.spinnerService.hide();
     this.getTokenSession();
   }
 
@@ -95,6 +101,30 @@ export class JukeboxHomeComponent implements OnInit {
       console.log(error);
     });
   }
+  postSugestao(form){
+    let sugestao = {
+      description: '',
+      email: ''
+    };
+    console.log(form);
+    sugestao.description = form.inputText;
+    sugestao.email = localStorage.getItem('email')
+    console.log(sugestao);
+    this.spinnerService.show();
+    this.getSpotifyService.postSugestao(sugestao).subscribe((data) => {
+      this.spinnerService.hide();
+      console.log(data);
+      sugestao.description = '';
+      sugestao.email = '';
+      sugestaoSucesso();
+    }, (error) => {
+      this.spinnerService.hide();
+      console.log(error);
+      sugestao.description = '';
+      sugestao.email = '';
+      sugestaoErro();
+    });
+  }
 
   //********** chamadas service  Fim *****************
 
@@ -103,6 +133,7 @@ export class JukeboxHomeComponent implements OnInit {
 
   modifyStatePlaylistPick(playlist) {
     this.statePlaylist = playlist;
+    this.naoEncontrou = false;
     console.log(this.statePlaylist);
   }
 
@@ -209,11 +240,14 @@ export class JukeboxHomeComponent implements OnInit {
   getArtistsFromPlaylistPostgre(){
     console.log(this.statePlaylist)
     console.log(this.statePlaylistEnum(this.statePlaylist))
+    this.spinnerService.show();
     this.getSpotifyService.getArtistsByPlaylist(this.statePlaylistEnum(this.statePlaylist)).subscribe((data) => {
+      this.spinnerService.hide();
       console.log(data);
       this.artists = data;
       this.artistasTableOpen = true;
     }, (error) => {
+      this.spinnerService.hide();
       console.log(error);
     });
   }
@@ -226,11 +260,17 @@ export class JukeboxHomeComponent implements OnInit {
       console.log('Busca por artista....');
       console.log(form);
       if(form.inputSearch !== '' || form.inputSearch !== null || form.inputSearch !== undefined ){
+        this.spinnerService.show();
         this.getSpotifyService.getArtistPostgree(form.inputSearch , this.statePlaylistEnum(this.statePlaylist)).subscribe((data) => {
+          this.spinnerService.hide();
           console.log(data);
+          if(data.length === 0){
+            filtroVazio();
+          }
           this.artists = data;
           this.artistasTableOpen = true;
         }, (error) => {
+          this.spinnerService.hide();
           console.log(error);
         });
       }else {
@@ -239,19 +279,38 @@ export class JukeboxHomeComponent implements OnInit {
     } else if (this.statePickPlaylist === 'artista' && this.enterTopTracks) {
       this.topTracksArtistOpen = false;
       this.enterFilter = true;
+      this.spinnerService.show();
       this.getSpotifyService.getTracksFilterByArtist( this.artistPicked, form.inputSearch, this.statePlaylistEnum(this.statePlaylist)).subscribe((data) => {
+        this.spinnerService.hide();
         console.log(data);
-        this.musicsFilterArtist = data;
-        this.trackArtistsFilter = true;
+        if(data.length === 0){
+          filtroVazio();
+          this.musicsFilterArtist = data;
+          this.trackArtistsFilter = true;
+        }else {
+          this.musicsFilterArtist = data;
+          this.trackArtistsFilter = true;
+        }
       }, (error) => {
+        this.spinnerService.hide();
         console.log(error);
       });
     } else if (this.statePickPlaylist === 'musica'){
+      this.spinnerService.show();
       this.getSpotifyService.getMusics(form.inputSearch, this.statePlaylistEnum(this.statePlaylist)).subscribe((data) => {
+        this.spinnerService.hide();
         console.log(data);
-        this.musicsBytrack = data;
-        this.tableByTrackOpen = true;
+        if(data.length === 0){
+          filtroVazio();
+          this.musicsBytrack = data;
+          this.tableByTrackOpen = true;
+        }else {
+          this.musicsBytrack = data;
+          this.tableByTrackOpen = true;
+        }
+
       }, (error) => {
+        this.spinnerService.hide();
         console.log(error);
       });
     }
@@ -263,11 +322,14 @@ export class JukeboxHomeComponent implements OnInit {
     this.artistPicked = artist.name;
     this.artistasTableOpen = false;
     this.enterTopTracks = true;
+    this.spinnerService.show();
     this.getSpotifyService.getTracksByArtist(artist.name, this.statePlaylistEnum(this.statePlaylist)).subscribe((data) => {
+      this.spinnerService.hide();
       console.log(data);
       this.musicsTopTracks = data;
       this.topTracksArtistOpen = true;
     }, (error) => {
+      this.spinnerService.hide();
       console.log(error);
     });
 
@@ -303,13 +365,16 @@ export class JukeboxHomeComponent implements OnInit {
       photoUri: this.fotoMusicaEscolhida
 
     };
+    this.spinnerService.show();
     this.getPlaylistService.putMusicOnPlaylist(this.statePlaylist, this.musicVoted).subscribe((data) => {
+      this.spinnerService.hide();
       console.log(data);
       this.modifyStatePlaylistVote(this.statePickPlaylist);
       // this.musicsTopTracks = data;
       // this.topTracksArtistOpen = true;
       pickSucesso();
     }, (error) => {
+      this.spinnerService.hide();
       console.log(error);
       pickErro();
     });
@@ -347,11 +412,14 @@ export class JukeboxHomeComponent implements OnInit {
         this.status = 'Procure um artista';
         this.status2 = '';
         console.log('aqui 2');
+        this.spinnerService.show();
         this.getSpotifyService.getArtistPostgree(this.artistPicked , this.statePlaylistEnum(this.statePlaylist)).subscribe((data) => {
+          this.spinnerService.hide();
           console.log(data);
           this.artists = data;
           this.artistasTableOpen = true;
         }, (error) => {
+          this.spinnerService.hide();
           console.log(error);
         });
         this.enterTopTracks = true;
@@ -457,6 +525,7 @@ export class JukeboxHomeComponent implements OnInit {
     this.status = 'Playlist: ' + playlist;
     this.topTracksArtistOpen = false;
     this.tableByTrackOpen = false;
+    this.naoEncontrou = false;
     this.artistasTableOpen = false;
     this.enterTopTracks = false;
     this.enterFilter = false;
@@ -502,8 +571,10 @@ export class JukeboxHomeComponent implements OnInit {
   }
 
   voteSim(){
+    this.spinnerService.show();
     this.getPlaylistService.voteMusicsOnPlaylist(this.statePickPlaylist, localStorage.getItem('email'),  this.musicVotedId).subscribe((data) => {
       console.log(data);
+      this.spinnerService.hide();
       votoSucesso();
       this.voteCardOpen = false;
       this.musicPlaylistOpen = true;
@@ -535,6 +606,41 @@ export class JukeboxHomeComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  openNaoEncontrou(){
+    if (this.naoEncontrou) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  abrirNaoEncontrou(){
+    this.status = 'Dê sua sugestão de música para a próxima festa :)';
+    this.naoEncontrou = true;
+    this.topTracksArtistOpen = false;
+    this.tableByTrackOpen = false;
+    this.artistasTableOpen = false;
+    this.enterTopTracks = false;
+    this.enterFilter = false;
+    this.topTracksArtistOpen = false;
+    this.artistasTableOpen = false;
+    this.searchOpen = false;
+    this.cardEscolhaOpen = false;
+    this.trackArtistsFilter = false;
+    this.musicPlaylistOpen = false;
+    this.musicPicked = null;
+    this.voteCardOpen = false;
+    this.musicVoted = null;
+    this.playlists = [];
+    this.artists = [];
+    this.musicsTopTracks = [];
+    this.musicsFilterArtist = [];
+    this.artistaEscolhido = '';
+    this.musicEscolhida = '';
+    this.fotoMusicaEscolhida = '';
+    this.musicPlaylistOpen = false;
   }
 
 }

@@ -1,6 +1,8 @@
 <body>
+
 <!-- Main container -->
 <div class="container">
+  
   <!-- Blueprint header -->
   <header class="bp-header cf">
     <div class="dummy-logo">
@@ -20,6 +22,7 @@
       <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="Todos">
         <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-2" aria-owns="submenu-2" href="#">Votação</a></li>
         <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Escolha sua música</a></li>
+        <li class="menu__item" role="menuitem"><a class="menu__link" (click)="abrirNaoEncontrou()" href="#">Não achou sua música?</a></li>
       </ul>
       <!-- Submenu 1 -->
       <ul  data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu"
@@ -66,13 +69,16 @@
 
     </div>
   </nav>
+
   <div class="content">
     <div id="status">
       <p>{{status}}</p>
       <p>{{status2}}</p>
     </div>
 
+
     <div *ngIf="openSearchInput()">
+      
     <form   #formPickSearch="ngForm" (ngSubmit)="search(formPickSearch.value)">
     <div  class="container_input">
       <input ngModel name="inputSearch" type="text">
@@ -85,13 +91,35 @@
       <div class="btnVoltar">
         <button *ngIf="byMusic()" (click)="voltar()" id="voltarBtn"  class="btn fourth">Voltar</button>
       </div>
+    
     </div>
 
 
 
+    <div *ngIf="openNaoEncontrou()">
+      
+      <form   #formSugestao="ngForm"  (ngSubmit)="postSugestao(formSugestao.value)">
+
+        <input id="simpleForm" ngModel name="inputText" type="text" placeholder="Digite sua música" required>
+
+
+        <button type="submit" id="buscar" class="btn fourth">Enviar</button>
+
+      </form>
+    
+
+    </div>
+
+
+
+
+
     <!--block Escolha por Artistas-->
+
     <ul  *ngIf="openArtistasTable()" id="searchArtists" class="products">
+
       <li *ngFor="let artist of artists" class="product">
+       
         <div class="top">
           <img src={{artist.uriImage}}>
         </div>
@@ -106,12 +134,18 @@
             <button (click)="topTracksArtist(artist)" id="escolherArtista" class="btn fourth">Escolher</button>
           </div>
         </div>
+        
       </li>
+
+
     </ul>
 
 
+
     <!--block Top Tracks Artist-->
+
     <ul  *ngIf="openTopTracksArtist()"  class="products">
+      
       <li *ngFor="let music of musicsTopTracks" class="product">
         <div class="top">
           <img src={{music.uriImage}}>
@@ -129,10 +163,14 @@
           </div>
         </div>
       </li>
+  
     </ul>
 
+
     <!--block Filtro Musica por artista-->
+
     <ul  *ngIf="openTracksArtisFilter()"  class="products">
+      
       <li *ngFor="let music of musicsFilterArtist" class="product">
         <div class="top">
           <img src={{music.uriImage}}>
@@ -151,10 +189,14 @@
           </div>
         </div>
       </li>
+  
     </ul>
 
+
     <!--block Card Final Escolha-->
+
     <ul *ngIf="openCardEscolha()" class="products">
+      
       <li id="escolhaFinal" class="product">
         <div class="top">
           <img src="{{fotoMusicaEscolhida}}">
@@ -173,10 +215,14 @@
 
         </div>
       </li>
+  
     </ul>
 
+
     <!--block Musics Playlists-->
+
     <ul *ngIf="openMusicPlaylistOpen()" class="products">
+      
       <li *ngFor="let music of musicsPlaylists; let i = index" class="product">
         <div class="top">
           <img src={{music.photoUri}}>
@@ -189,15 +235,19 @@
             <p>Votos <b class="votos">{{music.likes}}</b></p>
           </div>
           <div class="footer btn-center">
-            <button (click)="votar(music)" class="btn fourth">Vote</button>
+            <button (click)="votar(music)" id="posVotar" class="btn fourth">Vote</button>
           </div>
         </div>
       </li>
+  
     </ul>
 
 
+
     <!--block Vote Card-->
+
     <ul  *ngIf="openVoteCard()"class="products">
+      
       <li id="voteCard" class="product">
         <div class="top">
           <img src={{musicVotedPhotoUri}}>
@@ -210,17 +260,22 @@
             <!--<p> <b class="votos">{{music.likes}}</b></p>-->
           </div>
           <div class="footer btn-center">
-            <button (click)="voteSim()" class="btn fourth">Sim</button>
-            <button (click)="voteNao()" class="btn fourth">Não</button>
+            <button (click)="voteSim()" id="voteSim" class="btn fourth">Sim</button>
+            <button (click)="voteNao()" id="voteNao" class="btn fourth">Não</button>
           </div>
         </div>
       </li>
+  
     </ul>
 
 
+
     <!--block Search Music-->
+
     <ul *ngIf="openSearchMusic()" class="products">
+
       <li *ngFor="let music of musicsBytrack; let i = index" class="product">
+
         <div class="top">
           <img src={{music.uriImage}}>
         </div>
@@ -236,10 +291,16 @@
           </div>
         </div>
       </li>
+      
     </ul>
 
 
+
   </div>
+
 </div>
 
+
 </body>
+
+

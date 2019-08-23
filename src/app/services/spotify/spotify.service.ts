@@ -6,8 +6,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class SpotifyService {
 
-  url = 'https://umcincoumproducoes.herokuapp.com';
-  url2 ='http://umcincoumproducoes.herokuapp.com/jukebox';
+  url = 'http://localhost:8080';
+  url2 ='http://localhost:8080/jukebox';
   constructor(private http: HttpClient) { }
 
   getArtists(artist) {
@@ -64,5 +64,11 @@ export class SpotifyService {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
     return this.http.get(this.url2 + '/playlist/' + playlist + '/filter?music=' + music,{headers});
+  }
+
+  postSugestao(payload) {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    return this.http.post(this.url2 + '/sugestao', payload, {headers});
   }
 }

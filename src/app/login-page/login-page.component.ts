@@ -11,6 +11,9 @@ declare const cadastroErro: any;
 declare const loginSucesso: any;
 declare const loginErro: any;
 
+
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -30,7 +33,7 @@ export class LoginPageComponent implements OnInit {
   loginState = true;
   cadastroState = false;
 
-  constructor(private router: Router, private authService: AuthService, private loginService: LoginService) {
+  constructor(private router: Router, private spinnerService: NgxSpinnerService, private authService: AuthService, private loginService: LoginService) {
     this.getLoginService = loginService;
     this.getTokenSession();
   }
@@ -52,6 +55,7 @@ export class LoginPageComponent implements OnInit {
   login(form) {
       console.log(form);
       // Login Usuario por email & Senha
+    this.spinnerService.show();
       this.getLoginService.submitForm(form).subscribe((data) => {
         console.log(data);
         if (data == null) {
@@ -60,28 +64,33 @@ export class LoginPageComponent implements OnInit {
         } else {
           // Se login com sucesso adiciona evento ao usuario **** atualmente fixado 'jukebox'
           this.getLoginService.addEventUser(form.email).subscribe((data2) => {
+            this.spinnerService.hide();
             localStorage.setItem('email', form.email);
             console.log(data2);
             this.router.navigate(['jukebox']);
             loginSucesso();
           }, (error2) => {
+            this.spinnerService.hide();
             loginErro();
           });
         }
       }, (error) => {
+        this.spinnerService.hide();
         loginErro();
       });
   }
 
   cadastroForm(form2) {
-
+    this.spinnerService.show();
       this.getLoginService.createUser(form2).subscribe((data) => {
+        this.spinnerService.hide();
         console.log(data);
         cadastro();
         this.loginState = true;
         this.cadastroState = false;
 
       }, (error2) => {
+        this.spinnerService.hide();
         cadastroErro();
       });
 

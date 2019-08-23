@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
   providedIn: 'root'
 })
 export class PlaylistService {
-  url = 'https://umcincoumproducoes.herokuapp.com';
+  url = 'http://localhost:8080';
   constructor(private http: HttpClient) { }
 
   putMusicOnPlaylist(playlist, payload) {

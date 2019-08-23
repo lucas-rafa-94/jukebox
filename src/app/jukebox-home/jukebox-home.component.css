@@ -992,6 +992,14 @@ p {
     margin-left: 2.7rem;
     margin-top: 10px;
   }
+  #simpleForm {
+    margin-left: 2.3rem;
+    width: 250px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+  }
 }
 
 
@@ -1006,6 +1014,14 @@ p {
   }
   #voltarBtn{
     margin-left: 4.4rem;
+    margin-top: 10px;
+  }
+  #simpleForm {
+    margin-left: 4rem;
+    width: 250px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
     margin-top: 10px;
   }
   .status{
@@ -1025,7 +1041,38 @@ p {
     margin-left: 5.7rem;
     margin-top: 10px;
   }
+  #simpleForm {
+    margin-left: 5.2rem;
+    width: 250px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+  }
 }
+
+button#voteSim {
+  margin-left: 85px;
+}
+button#voteNao {
+  margin-left: 80px;
+}
+
+button#posVotar {
+  margin-left: 80px;
+}
+
+
+
+
+/*#simpleForm {*/
+  /*margin-left: 60px;*/
+  /*width: 250px;*/
+  /*margin-bottom: 20px;*/
+  /*border-radius: 10px;*/
+  /*padding: 20px;*/
+/*}*/
+
 
 
 

@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import {LoginService} from './services/login/login.service';
 import {EventsService} from './services/events/events.service';
 import {SpotifyService} from './services/spotify/spotify.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import {PlaylistService} from './services/playlist/playlist.service';
 import { HttpClientModule } from '@angular/common/http';
 import {LoginPageComponent} from './login-page/login-page.component';
@@ -47,6 +48,7 @@ export function provideConfig() {
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    NgxSpinnerModule,
     BrowserModule
   ],
   exports: [RouterModule],
