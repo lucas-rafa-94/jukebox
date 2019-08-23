@@ -8,7 +8,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class EventsService {
 
   constructor(private http: HttpClient) { }
-  url = 'http://localhost:8080/event';
+  url = 'http://ec2-18-231-45-109.sa-east-1.compute.amazonaws.com:8080/event';
 
   //Responsavel por pegar playlists do evento por nome no momento fixado so pela jukebox
   getPlaylistFromEventByName() {
