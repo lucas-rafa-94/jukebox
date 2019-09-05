@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {EventsService} from './../services/events/events.service';
 import {SpotifyService} from './../services/spotify/spotify.service';
 import {PlaylistService} from './../services/playlist/playlist.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 declare const run: any;
 declare const pickSucesso: any;
@@ -61,7 +62,7 @@ export class JukeboxHomeComponent implements OnInit {
   cardEscolhaOpen = false;
   trackArtistsFilter = false;
 
-  constructor(private router: Router, private eventService: EventsService, private spotifyService: SpotifyService, private playlistService: PlaylistService) {
+  constructor(private router: Router, private eventService: EventsService, private spinnerService: NgxSpinnerService, private spotifyService: SpotifyService, private playlistService: PlaylistService) {
     this.getEventService = eventService;
     this.getSpotifyService = spotifyService;
     this.getPlaylistService = playlistService;
@@ -87,11 +88,14 @@ export class JukeboxHomeComponent implements OnInit {
   //********** chamadas service Inicio  *****************
 
   getPlaylistsFromEvent() {
+    this.spinnerService.show();
     this.getEventService.getPlaylistFromEventByName().subscribe((data) => {
       console.log(data);
       console.log(data.playlists);
+      this.spinnerService.hide();
       this.playlists = data.playlists;
     }, (error) => {
+      this.spinnerService.hide();
       console.log(error);
     });
   }
@@ -159,29 +163,38 @@ export class JukeboxHomeComponent implements OnInit {
     if (this.statePickPlaylist === 'artista' && !this.enterTopTracks) {
       console.log('Busca por artista....');
       console.log(form);
+      this.spinnerService.show();
       this.getSpotifyService.getArtists(form.inputSearch).subscribe((data) => {
         console.log(data);
+        this.spinnerService.hide();
         this.artists = data;
         this.artistasTableOpen = true;
       }, (error) => {
+        this.spinnerService.hide();
         console.log(error);
       });
     } else if (this.statePickPlaylist === 'artista' && this.enterTopTracks) {
       this.topTracksArtistOpen = false;
       this.enterFilter = true;
+      this.spinnerService.show();
       this.getSpotifyService.getTracksFromArtist(form.inputSearch, this.artistPicked).subscribe((data) => {
         console.log(data);
         this.musicsFilterArtist = data;
+        this.spinnerService.hide();
         this.trackArtistsFilter = true;
       }, (error) => {
         console.log(error);
+        this.spinnerService.hide();
       });
     } else if (this.statePickPlaylist === 'musica'){
+      this.spinnerService.show();
       this.getSpotifyService.getTracksWithoutArtists(form.inputSearch).subscribe((data) => {
         console.log(data);
+        this.spinnerService.hide();
         this.musicsBytrack = data;
         this.tableByTrackOpen = true;
       }, (error) => {
+        this.spinnerService.hide();
         console.log(error);
       });
     }
@@ -193,11 +206,14 @@ export class JukeboxHomeComponent implements OnInit {
     this.artistPicked = artist.name;
     this.artistasTableOpen = false;
     this.enterTopTracks = true;
+    this.spinnerService.show();
     this.getSpotifyService.getTopTracksArtist(artist.id).subscribe((data) => {
       console.log(data);
+      this.spinnerService.hide();
       this.musicsTopTracks = data;
       this.topTracksArtistOpen = true;
     }, (error) => {
+      this.spinnerService.hide();
       console.log(error);
     });
 
@@ -233,13 +249,16 @@ export class JukeboxHomeComponent implements OnInit {
       photoUri: this.fotoMusicaEscolhida
 
     };
+    this.spinnerService.show();
     this.getPlaylistService.putMusicOnPlaylist(this.statePlaylist, this.musicVoted).subscribe((data) => {
       console.log(data);
+      this.spinnerService.hide();
       this.modifyStatePlaylistVote(this.statePickPlaylist);
       // this.musicsTopTracks = data;
       // this.topTracksArtistOpen = true;
       pickSucesso();
     }, (error) => {
+      this.spinnerService.hide();
       console.log(error);
       pickErro();
     });
@@ -391,12 +410,14 @@ export class JukeboxHomeComponent implements OnInit {
 
 
     this.statePickPlaylist = playlist;
-
+    this.spinnerService.show();
     this.getPlaylistService.getMusicsOnPlaylist(playlist).subscribe((data) => {
       console.log(data.trackSelectedModelList);
+      this.spinnerService.hide();
       this.musicsPlaylists = data.trackSelectedModelList;
       // this.topTracksArtistOpen = true;
     }, (error) => {
+      this.spinnerService.hide();
       console.log(error);
     });
   }
@@ -412,8 +433,10 @@ export class JukeboxHomeComponent implements OnInit {
   }
 
   voteSim(){
+    this.spinnerService.show();
     this.getPlaylistService.voteMusicsOnPlaylist(this.statePickPlaylist, localStorage.getItem('email'),  this.musicVotedId).subscribe((data) => {
       console.log(data);
+      this.spinnerService.hide();
       votoSucesso();
       this.voteCardOpen = false;
       this.musicPlaylistOpen = true;
@@ -421,6 +444,7 @@ export class JukeboxHomeComponent implements OnInit {
       // this.topTracksArtistOpen = true;
     }, (error) => {
       console.log(error);
+      this.spinnerService.hide();
       votoErro();
     });
   }

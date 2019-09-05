@@ -12,7 +12,7 @@ function loginSucesso(){
 }
 
 function loginErro(){
-  alert('Erro ao efetuar login');
+  alert('Erro ao efetuar login | Senha ou email inválido!');
 }
 
 
@@ -33,4 +33,14 @@ function votoErro(){
   alert('Erro ao votar');
 }
 
+function sugestaoSucesso(){
+  alert('Sucesso ao enviar sugestão :)');
+}
 
+function sugestaoErro(){
+  alert('Erro ao enviar sugestão, tente mais tarde :(');
+}
+
+function filtroVazio(){
+  alert('Não temos nenhum registro para essa pesquisa :(');
+}

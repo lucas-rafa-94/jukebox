@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {SocialLoginModule, AuthServiceConfig} from 'angularx-social-login';
 import {GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
 import { FormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import {LoginService} from './services/login/login.service';
 import {EventsService} from './services/events/events.service';
 import {SpotifyService} from './services/spotify/spotify.service';
@@ -47,6 +48,7 @@ export function provideConfig() {
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    NgxSpinnerModule,
     BrowserModule
   ],
   exports: [RouterModule],

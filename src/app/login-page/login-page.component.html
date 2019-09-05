@@ -1,6 +1,7 @@
 <div class="container-login100" style="background-image: url('../../assets/img/back7.png');">
-  <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
-    <form *ngIf="loginOpen()" #formLogin="ngForm" (ngSubmit)="login(formLogin.value)" class="login100-form validate-form">
+
+  <div  *ngIf="loginOpen()"  class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
+    <form #formLogin="ngForm" (ngSubmit)="login(formLogin.value)" class="login100-form validate-form">
 				<span class="login100-form-title p-b-37">
 					<img src="assets/img/jukebox_logo.png" style="height: 100px; width: 100px">
           <h6 id="title">Jukebox Party</h6>
@@ -20,14 +21,15 @@
         <button type="submit" class="login100-form-btn">
           Logar
         </button>
-        <button id="cadastroBtn" ngModel name="cadastroBtn" type="submit" class="login100-form-btn">
+        <button id="cadastroBtn" ngModel name="cadastroBtn" (click)="openCadastro(formLogin.value)" class="login100-form-btn">
           Cadastre-se
         </button>
       </div>
     </form>
+  </div>
 
-
-    <form *ngIf="cadastorOpen()" #formCadastro="ngForm" (ngSubmit)="cadastroForm(formCadastro.value)" class="login100-form validate-form">
+  <div *ngIf="cadastorOpen()" class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
+    <form  #formCadastro="ngForm" (ngSubmit)="cadastroForm(formCadastro.value)" class="login100-form validate-form">
 				<span class="login100-form-title p-b-37">
 					<img src="assets/img/jukebox_logo.png" style="height: 100px; width: 100px">
           <h6 id="title">Jukebox Party</h6>
@@ -49,6 +51,7 @@
         </button>
       </div>
     </form>
-
   </div>
+
+
 </div>

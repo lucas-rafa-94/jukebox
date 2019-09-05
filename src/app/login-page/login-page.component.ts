@@ -4,6 +4,7 @@ import {LoginService} from './../services/login/login.service';
 import {AuthService} from 'angularx-social-login';
 import {FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login';
 import {SocialUser} from 'angularx-social-login';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 
 declare const cadastro: any;
@@ -19,6 +20,7 @@ declare const loginErro: any;
 
 
 
+
 export class LoginPageComponent implements OnInit {
 
 
@@ -30,7 +32,7 @@ export class LoginPageComponent implements OnInit {
   loginState = true;
   cadastroState = false;
 
-  constructor(private router: Router, private authService: AuthService, private loginService: LoginService) {
+  constructor(private router: Router, private spinnerService: NgxSpinnerService, private authService: AuthService, private loginService: LoginService) {
     this.getLoginService = loginService;
     this.getTokenSession();
   }
@@ -50,47 +52,47 @@ export class LoginPageComponent implements OnInit {
   }
 
   login(form) {
-    if(form.email !== '' && form.password !== ''){
-      console.log(form);
-      // Login Usuario por email & Senha
-      this.getLoginService.submitForm(form).subscribe((data) => {
-        console.log(data);
-        if (data == null) {
-          console.log('nulll');
-        } else {
-          // Se login com sucesso adiciona evento ao usuario **** atualmente fixado 'jukebox'
-          this.getLoginService.addEventUser(form.email).subscribe((data2) => {
-            localStorage.setItem('email', form.email);
-            console.log(data2);
-            this.router.navigate(['jukebox']);
-            loginSucesso();
-          }, (error2) => {
-            loginErro();
-          });
-        }
-      }, (error) => {
+    console.log(form);
+    // Login Usuario por email & Senha
+    this.spinnerService.show();
+    this.getLoginService.submitForm(form).subscribe((data) => {
+      console.log(data);
+      if (data == null) {
+        console.log('nulll');
         loginErro();
-      });
-    }else {
-      this.cadastroState = true;
-      this.loginState = false;
-    }
+      } else {
+        // Se login com sucesso adiciona evento ao usuario **** atualmente fixado 'jukebox'
+        this.getLoginService.addEventUser(form.email).subscribe((data2) => {
+          this.spinnerService.hide();
+          localStorage.setItem('email', form.email);
+          console.log(data2);
+          this.router.navigate(['jukebox']);
+          loginSucesso();
+        }, (error2) => {
+          this.spinnerService.hide();
+          loginErro();
+        });
+      }
+    }, (error) => {
+      this.spinnerService.hide();
+      loginErro();
+    });
   }
 
-  cadastroForm(form) {
-    if(form.email !== '' && form.password !== ''){
-      this.getLoginService.createUser(form).subscribe((data) => {
-        console.log(data);
-        cadastro();
-        this.loginState = true;
-        this.cadastroState = false
+  cadastroForm(form2) {
+    this.spinnerService.show();
+    this.getLoginService.createUser(form2).subscribe((data) => {
+      this.spinnerService.hide();
+      console.log(data);
+      cadastro();
+      this.loginState = true;
+      this.cadastroState = false;
 
-      }, (error2) => {
-        cadastroErro();
-      });
-    }else{
+    }, (error2) => {
+      this.spinnerService.hide();
       cadastroErro();
-    }
+    });
+
   }
 
 
@@ -107,6 +109,12 @@ export class LoginPageComponent implements OnInit {
     }else{
       return false;
     }
+  }
+
+  openCadastro(form){
+    form = '';
+    this.cadastroState = true;
+    this.loginState = false;
   }
 
   cadastorOpen(){
