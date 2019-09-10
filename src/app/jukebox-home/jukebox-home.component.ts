@@ -51,6 +51,8 @@ export class JukeboxHomeComponent implements OnInit {
   status = '';
   status2 = '';
 
+  artistaSelecionado = '';
+
   //estado views
   voteCardOpen = false;
   musicPlaylistOpen = false;
@@ -106,6 +108,7 @@ export class JukeboxHomeComponent implements OnInit {
   //Controla o estado das playlists escolhidas
 
   modifyStatePlaylistPick(playlist) {
+    this.artistaSelecionado = '';
     this.statePlaylist = playlist;
     console.log(this.statePlaylist);
   }
@@ -201,7 +204,8 @@ export class JukeboxHomeComponent implements OnInit {
   }
 
   topTracksArtist(artist){
-    this.status = 'Artista Escolhido: ' + artist.name;
+    this.status = 'Artista Escolhido:';
+    this.artistaSelecionado =  artist.name
     this.status2 = 'Pesquise uma música do artista';
     this.artistPicked = artist.name;
     this.artistasTableOpen = false;
@@ -251,13 +255,30 @@ export class JukeboxHomeComponent implements OnInit {
     };
     this.spinnerService.show();
     this.getPlaylistService.putMusicOnPlaylist(this.statePlaylist, this.musicVoted).subscribe((data) => {
+      this.status2 = '';
+      this.artistaEscolhido = '';
+      this.musicEscolhida = '';
+      this.fotoMusicaEscolhida = '';
       console.log(data);
+      this.topTracksArtistOpen = false;
+      this.enterTopTracks = false
+      this.cardEscolhaOpen = false;
+      this.trackArtistsFilter = false;
+      this.artistaSelecionado = '';
       this.spinnerService.hide();
       this.modifyStatePlaylistVote(this.statePickPlaylist);
       // this.musicsTopTracks = data;
       // this.topTracksArtistOpen = true;
       pickSucesso();
     }, (error) => {
+      this.topTracksArtistOpen = false;
+      this.cardEscolhaOpen = false;
+      this.trackArtistsFilter = false;
+      this.enterTopTracks = false;
+      this.artistaEscolhido = '';
+      this.musicEscolhida = '';
+      this.fotoMusicaEscolhida = '';
+      this.artistaSelecionado = '';
       this.spinnerService.hide();
       console.log(error);
       pickErro();
@@ -287,26 +308,31 @@ export class JukeboxHomeComponent implements OnInit {
       this.cardEscolhaOpen = false;
     }
       if (this.trackArtistsFilter === true && this.statePickPlaylist === 'artista' ){
+        console.log('ebtrou 1');
         this.trackArtistsFilter = false;
         this.artistasTableOpen = true;
         this.artists = [];
         this.enterTopTracks = false;
         this.enterFilter = false;
         this.status = 'Procure um artista';
+        // this.artistaSelecionado = '';
         this.status2 = '';
       }
       if (this.topTracksArtistOpen === true && this.statePickPlaylist === 'artista'){
+        console.log('ebtrou 2');
         this.topTracksArtistOpen = false;
         this.artistasTableOpen = true;
         this.artists = [];
         this.enterTopTracks = false;
         this.enterFilter = false;
         this.status = 'Procure um artista';
+        this.artistaSelecionado = '';
         this.status2 = '';
       }
       if(this.cardEscolhaOpen === true && this.statePickPlaylist === 'musica'){
         this.cardEscolhaOpen = false;
         this.tableByTrackOpen = true;
+        this.artistaSelecionado = '';
       }
   }
 
@@ -315,7 +341,6 @@ export class JukeboxHomeComponent implements OnInit {
   //Abertura Search Box
   openSearchInput() {
     if (this.searchOpen) {
-
       return true;
     } else {
       return false;
@@ -383,7 +408,8 @@ export class JukeboxHomeComponent implements OnInit {
 
   modifyStatePlaylistPickView(playlist){
     this.status2 = '';
-    this.status = 'Playlist: ' + playlist;
+    this.status = 'Playlist';
+    this.artistaSelecionado = playlist.toUpperCase();
     this.topTracksArtistOpen = false;
     this.tableByTrackOpen = false;
     this.artistasTableOpen = false;

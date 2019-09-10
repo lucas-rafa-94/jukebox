@@ -6,7 +6,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class LoginService {
 
-  url = 'https://umcincoumproducoes.herokuapp.com/user';
+  // url = 'https://umcincoumproducoes.herokuapp.com/user';
+  url = 'http://localhost:8080/user';
   constructor(private http: HttpClient) { }
 
   // Responsavel por logar usuario cadastrado
@@ -28,5 +29,18 @@ export class LoginService {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
     return this.http.post(this.url , payload ,{headers});
+  }
+
+  updatePasswordUser(payload) {
+    console.log(payload)
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    return this.http.post(this.url + '/update-password' , payload ,{headers});
+  }
+
+  getUserByEmail(email) {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    return this.http.get(this.url + '/' + email  , {headers});
   }
 }

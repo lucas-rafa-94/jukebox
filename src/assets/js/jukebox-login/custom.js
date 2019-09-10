@@ -44,3 +44,16 @@ function sugestaoErro(){
 function filtroVazio(){
   alert('Não temos nenhum registro para essa pesquisa :(');
 }
+
+function emailEncontrado(bool){
+  if(bool){
+    alert('E-mail encontrado :)');
+  }else{
+    alert('E-mail não encontrado :(');
+  }
+
+}
+
+function resetPass(str){
+  alert(str)
+}

@@ -11,6 +11,8 @@ declare const cadastro: any;
 declare const cadastroErro: any;
 declare const loginSucesso: any;
 declare const loginErro: any;
+declare const emailEncontrado: any;
+declare const resetPass: any;
 
 @Component({
   selector: 'app-login-page',
@@ -28,9 +30,11 @@ export class LoginPageComponent implements OnInit {
   private user: SocialUser;
   private loggedIn: boolean;
   getLoginService;
-
+  emailNovaSenha = '';
   loginState = true;
   cadastroState = false;
+  esqueceuSenhaEmailState = false;
+  redigiteSenhaState = false;
 
   constructor(private router: Router, private spinnerService: NgxSpinnerService, private authService: AuthService, private loginService: LoginService) {
     this.getLoginService = loginService;
@@ -96,6 +100,30 @@ export class LoginPageComponent implements OnInit {
   }
 
 
+  esqueceuSenhaEmailForm(form) {
+    console.log(form.email);
+    this.spinnerService.show();
+    this.getLoginService.getUserByEmail(form.email).subscribe((data) => {
+      this.spinnerService.hide();
+      console.log(data);
+      // cadastro();
+      this.loginState = false;
+      this.cadastroState = false;
+      if(data != null){
+        this.openRedigiteSenha();
+        this.emailNovaSenha = form.email;
+        emailEncontrado(true);
+      }else{
+        emailEncontrado(false);
+      }
+    }, (error2) => {
+      this.spinnerService.hide();
+      cadastroErro();
+    });
+
+  }
+
+
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
     console.log(this.user.email);
@@ -115,6 +143,15 @@ export class LoginPageComponent implements OnInit {
     form = '';
     this.cadastroState = true;
     this.loginState = false;
+    this.redigiteSenhaState = false;
+    this.esqueceuSenhaEmailState = false;
+  }
+
+  openRedigiteSenha(){
+    this.cadastroState = false;
+    this.loginState = false;
+    this.esqueceuSenhaEmailState = false;
+    this.redigiteSenhaState = true;
   }
 
   cadastorOpen(){
@@ -124,6 +161,95 @@ export class LoginPageComponent implements OnInit {
       return false;
     }
   }
+
+  esqueceuSenhaEmailOpen(){
+    if(this.esqueceuSenhaEmailState){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  openEsqueceuSenhaEmail(){
+    this.esqueceuSenhaEmailState = true;
+    this.loginState = false;
+    this.redigiteSenhaState = false;
+    this.cadastroState = false;
+  }
+
+
+  redigiteNovaSenhaOpen(){
+    if(this.redigiteSenhaState){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  closeRedigiteNovaSenha(form){
+    form = '';
+    this.emailNovaSenha = '';
+    this.cadastroState = false;
+    this.loginState = false;
+    this.redigiteSenhaState = false;
+    this.esqueceuSenhaEmailState = true;
+  }
+
+  closeEsqueceuSenhaEmail(form){
+    form = '';
+    this.emailNovaSenha = '';
+    this.cadastroState = false;
+    this.loginState = true;
+    this.redigiteSenhaState = false;
+    this.esqueceuSenhaEmailState = false;
+  }
+
+  closeCadastro(form){
+    form = '';
+    this.emailNovaSenha = ''
+    this.cadastroState = false;
+    this.loginState = true;
+    this.redigiteSenhaState = false;
+    this.esqueceuSenhaEmailState = false;
+  }
+
+  redigiteSenhaForm(form){
+    let bool = false;
+    if(form.newPass !== form.reNewPass){
+      console.log("senhas nao iguais");
+      resetPass('Senhas não batem! Tente novamente');
+    }
+    if(form.newPass === '' || form.reNewPass === ''){
+      console.log("senhas nao preenchidas");
+      resetPass('Senhas não preenchidas! Tente novamente');
+    }
+
+    if(form.newPass === form.reNewPass){
+      bool = true;
+    }
+    if(bool){
+      const user = {
+        password: form.newPass,
+        email: this.emailNovaSenha
+      };
+      this.spinnerService.show();
+      this.getLoginService.updatePasswordUser(user).subscribe((data) => {
+        this.spinnerService.hide();
+        console.log(data);
+        resetPass('Senha trocada com sucesso!');
+        this.loginState = true;
+        this.cadastroState = false;
+        this.esqueceuSenhaEmailState = false;
+        this.redigiteSenhaState = false;
+        this.emailNovaSenha = '';
+
+      }, (error2) => {
+        this.spinnerService.hide();
+        resetPass('Erro ao trocar senha :( Tente mais tarde');
+      });
+    }
+  }
+
+
 
 
 }

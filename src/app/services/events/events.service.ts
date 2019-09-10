@@ -8,9 +8,10 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class EventsService {
 
   constructor(private http: HttpClient) { }
-  url = 'https://umcincoumproducoes.herokuapp.com/event';
+  // url = 'https://umcincoumproducoes.herokuapp.com/event';
+  url = 'http://localhost:8080';
 
-  //Responsavel por pegar playlists do evento por nome no momento fixado so pela jukebox
+  // Responsavel por pegar playlists do evento por nome no momento fixado so pela jukebox
   getPlaylistFromEventByName() {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');

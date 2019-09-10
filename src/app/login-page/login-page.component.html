@@ -4,7 +4,7 @@
     <form #formLogin="ngForm" (ngSubmit)="login(formLogin.value)" class="login100-form validate-form">
 				<span class="login100-form-title p-b-37">
 					<img src="assets/img/jukebox_logo.png" style="height: 100px; width: 100px">
-          <h6 id="title">Jukebox Party</h6>
+          <h6 id="title">Antes Tardis</h6>
 				</span>
 
       <div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">
@@ -17,7 +17,10 @@
         <span class="focus-input100"></span>
       </div>
 
+
+
       <div class="container-login100-form-btn">
+
         <button type="submit" class="login100-form-btn">
           Logar
         </button>
@@ -25,6 +28,11 @@
           Cadastre-se
         </button>
       </div>
+      <br>
+      <div class="container-login100-form-btn">
+        <h5 (click)="openEsqueceuSenhaEmail()">Esqueceu sua senha? Clique aqui</h5>
+      </div>
+      <br>
     </form>
   </div>
 
@@ -32,7 +40,7 @@
     <form  #formCadastro="ngForm" (ngSubmit)="cadastroForm(formCadastro.value)" class="login100-form validate-form">
 				<span class="login100-form-title p-b-37">
 					<img src="assets/img/jukebox_logo.png" style="height: 100px; width: 100px">
-          <h6 id="title">Jukebox Party</h6>
+          <h6 id="title">Antes Tardis</h6>
 				</span>
 
       <div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">
@@ -50,8 +58,70 @@
           Cadastrar
         </button>
       </div>
+      <br>
+      <div class="container-login100-form-btn">
+        <button (click)="closeCadastro(formCadastro.value)" class="login100-form-btn">
+          Cancelar
+        </button>
+      </div>
     </form>
   </div>
 
 
+  <div *ngIf="esqueceuSenhaEmailOpen()" class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
+    <form  #formEsqueceuSenhaEmail="ngForm" (ngSubmit)="esqueceuSenhaEmailForm(formEsqueceuSenhaEmail.value)" class="login100-form validate-form">
+				<span class="login100-form-title p-b-37">
+					<img src="assets/img/jukebox_logo.png" style="height: 100px; width: 100px">
+          <h6 id="title">Antes Tardis</h6>
+				</span>
+
+      <div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">
+        <input ngModel class="input100" type="text" name="email" placeholder="Digite seu email" >
+        <span class="focus-input100"></span>
+      </div>
+
+      <div class="container-login100-form-btn">
+        <button type="submit" class="login100-form-btn">
+          Conferir Email
+        </button>
+      </div>
+      <br>
+      <div class="container-login100-form-btn">
+        <button (click)="closeEsqueceuSenhaEmail(formEsqueceuSenhaEmail.value)" class="login100-form-btn">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+
+
+  <div *ngIf="redigiteNovaSenhaOpen()" class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
+    <form  #formRedigiteSenhaForm="ngForm" (ngSubmit)="redigiteSenhaForm(formRedigiteSenhaForm.value)" class="login100-form validate-form">
+				<span class="login100-form-title p-b-37">
+					<img src="assets/img/jukebox_logo.png" style="height: 100px; width: 100px">
+          <h6 id="title">Antes Tardis</h6>
+				</span>
+
+      <div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">
+        <input ngModel class="input100" type="password" name="newPass" placeholder="Digite sua nova senha" >
+        <span class="focus-input100"></span>
+      </div>
+      <div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">
+        <input ngModel class="input100" type="password" name="reNewPass" placeholder="Redigite sua nova senha" >
+        <span class="focus-input100"></span>
+      </div>
+
+      <div class="container-login100-form-btn">
+        <button type="submit" class="login100-form-btn">
+          Trocar Senha
+        </button>
+      </div>
+      <br>
+      <div class="container-login100-form-btn">
+        <button (click)="closeRedigiteNovaSenha(formEsqueceuSenhaEmail.value)" class="login100-form-btn">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

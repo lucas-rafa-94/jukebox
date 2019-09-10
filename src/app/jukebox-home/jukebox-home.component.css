@@ -1,5 +1,4 @@
 /* Icons (made with Icomoon.io) */
-
 @font-face {
   font-family: 'feather';
   font-weight: normal;
@@ -13,16 +12,27 @@ html {
 }
 
 li#escolhaFinal {
-  height: 650px;
+  height: 570px;
 }
 
 button#escolherArtista {
   margin-left: 56px;
 }
 
-button#escolherPorMusica{
-  margin-left: 56px;
+.product .footer .btn-center .fourth{
+
 }
+#escolherMusicaTopTracks{
+  margin-top: -100px;
+}
+
+#escolherMusicaByArtist{
+  margin-top: -100px;
+}
+
+/*button#escolherPorMusica{*/
+  /*margin-left: 56px;*/
+/*}*/
 button#escolherMusica {
   margin-left: 56px;
 }
@@ -664,7 +674,7 @@ a:hover {
 
 p {
   text-align: initial;
-  margin-left: 15px;
+  /*margin-left: 15px;*/
 }
 
 
@@ -673,6 +683,7 @@ h5 {
   margin-top: -7px;
   text-align: initial;
   margin-left: 15px;
+  font-size: inherit;
 }
 
 .products {
@@ -686,24 +697,53 @@ h5 {
   border: 1px solid #c81854;
   display: inline-block;
   width: 310px;
-  height: 550px;
+  /*height: 500px;*/
   margin: 10px;
   border-radius: 5px;
   background: #1c1d22;
 }
 
 #voteCard{
-  height: 600px;
+  height: 500px;
+}
+
+button#btnVotar {
+  margin-left: 80px;
+  /* position: relative; */
+}
+
+.title{
+  font-family: Futura;
+  font-size: x-large;
+}
+
+.subtitle{
+  font-family: Futura;
+  font-size: medium;
+  margin-top: 10px;
+}
+
+
+
+button#btnVotoSim {
+   /*margin-left: 83px;*/
+   /* position: relative; */
+ }
+
+button#btnVotoNao {
+  margin-left: 80px;
+  /* position: relative; */
 }
 
 .product .top img{
   box-shadow: 0 0 25px 0 #c81854, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #c81854;
   display: inline-block;
-  width: 290px;
-  height: 300px;
-  margin-top: 5px;
-  border-radius: 700px;
+  width: 200px;
+  height: 200px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-radius: 800px;
   /*background: #1c1d22;*/
 }
 
@@ -711,8 +751,13 @@ h5 {
 
   display: inline-block;
   width: 298px;
-  height: 200px;
+  /*height: 200px;*/
   border-radius: 5px;
+}
+
+.product .footer .description p{
+
+  margin-left: 15px;
 }
 
 .product .footer .posicao {
@@ -720,7 +765,7 @@ h5 {
   color: white;
   border-radius: 50%;
   width: 152px;
-  height: 152px;
+  /*height: 152px;*/
   margin: 50px auto;
   text-align: center;
   vertical-align: middle;
@@ -746,8 +791,8 @@ h5 {
   color: #3b3d4a;
 }
 
-.btn-center {
-  text-align: center;
+.product .footer .btn-center .button.btn.fourth {
+
 }
 
 .btn {
@@ -763,12 +808,12 @@ h5 {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1;
-  margin: 20px;
+  margin: auto;
   padding: 1.2em 2.8em;
   text-decoration: none;
   text-align: center;
   text-transform: uppercase;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Futura PT', sans-serif;
   font-weight: 700;
 }
 .btn:hover, .btn:focus {
@@ -778,9 +823,11 @@ h5 {
 
 .fourth {
   box-shadow: 0 0 25px 0 #c81854, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
-  margin-top: 1px;
+  /*margin-top: 1px;*/
   /* text-align: center; */
-  margin-left: 60px;
+  /*margin-left: 65px;*/
+  margin: auto;
+  margin-bottom: 10px;
   /*border-color: #f1c40f;*/
   border-color: #c81854;
   color: #c81854;
@@ -845,7 +892,7 @@ body #cdawrap a:hover.carbon-poweredby {
 
 p {
   margin-bottom: 20px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 /*@import url('https://fonts.googleapis.com/css?family=Inconsolata:700');*/
@@ -865,12 +912,46 @@ p {
   position: relative;
   margin: auto;
   margin-top: 25px;
+  margin-bottom: 20px;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   width: 300px;
   height: 100px;
+}
+
+.container_input_text {
+  background-color: #c81854;
+  padding: 20px;
+  box-shadow: 0 0 25px 0 #c81854, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: auto;
+  margin-top: 25px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  /*height: 100px;*/
+}
+
+.container_input_button {
+  position: relative;
+  margin: auto;
+  margin-top: 25px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  /*height: 120px;*/
+}
+
+.container_input_text p{
+  align-self: center;
+  text-align: center;
+
 }
 .container_input .search {
   position: absolute;
@@ -989,6 +1070,32 @@ p {
     margin-top: 10px;
   }
   #voltarBtn{
+    margin-left: 2.3rem;
+    margin-top: 10px;
+  }
+  #simpleForm {
+    margin-left: 2.3rem;
+    width: 250px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  .button.btn.fourth{
+    margin-left: 65px;
+  }
+}
+
+
+@media (min-width: 330px){
+  .products{
+    margin-left: -2.0rem;
+  }
+  #buscar{
+    margin-left: 5rem;
+    margin-top: 10px;
+  }
+  #voltarBtn{
     margin-left: 2.7rem;
     margin-top: 10px;
   }
@@ -1000,20 +1107,150 @@ p {
     padding: 20px;
     margin-top: 10px;
   }
+  .button.btn.fourth{
+    margin-left: 65px;
+  }
+}
+
+@media (min-width: 340px){
+  .products{
+    margin-left: -1.7rem;
+  }
+  #buscar{
+    margin-left: 5rem;
+    margin-top: 10px;
+  }
+  #voltarBtn{
+    margin-left: 3.1rem;
+    margin-top: 10px;
+  }
+  #simpleForm {
+    margin-left: 2.3rem;
+    width: 250px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  .button.btn.fourth{
+    margin-left: 65px;
+  }
+}
+
+@media (min-width: 350px){
+  .products{
+    margin-left: -1.4rem;
+  }
+  #buscar{
+    margin-left: 5rem;
+    margin-top: 10px;
+  }
+  #voltarBtn{
+    /*margin-left: 3.5rem;*/
+    margin-top: 10px;
+  }
+  #simpleForm {
+    margin-left: 2.3rem;
+    width: 250px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  .button.btn.fourth{
+    margin-left: 65px;
+  }
+}
+
+
+
+@media (min-width: 350px){
+  .products{
+    margin-left: -1.4rem;
+  }
+  #buscar{
+    margin-left: 5rem;
+    margin-top: 10px;
+  }
+  #voltarBtn{
+    margin-left: 3.3rem;
+    margin-top: 10px;
+  }
+  #simpleForm {
+    margin-left: 2.3rem;
+    width: 250px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  .button.btn.fourth{
+    margin-left: 65px;
+  }
+}
+
+@media (min-width: 360px){
+  .products{
+    margin-left: -1.1rem;
+  }
+  #buscar{
+    margin-left: 5rem;
+    margin-top: 10px;
+  }
+  #voltarBtn{
+    margin-left: 3.6rem;
+    margin-top: 10px;
+  }
+  #simpleForm {
+    margin-left: 2.3rem;
+    width: 250px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  .button.btn.fourth{
+    margin-left: 65px;
+  }
+}
+
+@media (min-width: 370px){
+  .products{
+    margin-left: -0.8rem;
+  }
+  #buscar{
+    margin-left: 5rem;
+    margin-top: 10px;
+  }
+  #voltarBtn{
+    margin-left: 3.9rem;
+    margin-top: 10px;
+  }
+  #simpleForm {
+    margin-left: 2.3rem;
+    width: 250px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  .button.btn.fourth{
+    margin-left: 65px;
+  }
 }
 
 
 
 @media (min-width: 375px){
   .products{
-    margin-left: -0.5rem;
+    margin-left: -0.3rem;
   }
   #buscar{
     margin-left: 6.7rem;
     margin-top: 10px;
   }
   #voltarBtn{
-    margin-left: 4.4rem;
+    margin-left: 4.1rem;
     margin-top: 10px;
   }
   #simpleForm {
@@ -1026,6 +1263,83 @@ p {
   }
   .status{
     margin-left: 4.4rem;
+  }
+}
+
+
+@media (min-width: 380px){
+  .products{
+    margin-left: -0.5rem;
+  }
+  #buscar{
+    margin-left: 5rem;
+    margin-top: 10px;
+  }
+  #voltarBtn{
+    margin-left: 4.2rem;
+    margin-top: 10px;
+  }
+  #simpleForm {
+    margin-left: 2.3rem;
+    width: 250px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  .button.btn.fourth{
+    margin-left: 65px;
+  }
+}
+
+@media (min-width: 390px){
+  .products{
+    margin-left: -0.5rem;
+  }
+  #buscar{
+    margin-left: 5rem;
+    margin-top: 10px;
+  }
+  #voltarBtn{
+    margin-left: 4.5rem;
+    margin-top: 10px;
+  }
+  #simpleForm {
+    margin-left: 2.3rem;
+    width: 250px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  .button.btn.fourth{
+    margin-left: 65px;
+  }
+}
+
+
+@media (min-width: 400px){
+  .products{
+    margin-left: -0.2rem;
+  }
+  #buscar{
+    margin-left: 5rem;
+    margin-top: 10px;
+  }
+  #voltarBtn{
+    margin-left: 4.8rem;
+    margin-top: 10px;
+  }
+  #simpleForm {
+    margin-left: 2.3rem;
+    width: 250px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  .button.btn.fourth{
+    margin-left: 65px;
   }
 }
 
