@@ -13,6 +13,7 @@ declare const votoSucesso: any;
 declare const votoErro: any;
 declare const resetSearch: any;
 declare const filtroVazio: any;
+declare const playlistSemMusica: any;
 
 @Component({
   selector: 'app-jukebox-home',
@@ -492,8 +493,10 @@ export class JukeboxHomeComponent implements OnInit {
     this.statePickPlaylist = playlist;
     this.spinnerService.show();
     this.getPlaylistService.getMusicsOnPlaylist(playlist).subscribe((data) => {
-      console.log(data.trackSelectedModelList);
       this.spinnerService.hide();
+      if(data.trackSelectedModelList.length === 0){
+        playlistSemMusica();
+      }
       this.musicsPlaylists = data.trackSelectedModelList;
       // this.topTracksArtistOpen = true;
     }, (error) => {

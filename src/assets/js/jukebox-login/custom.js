@@ -20,7 +20,7 @@ function loginSucesso(){
 }
 
 function loginErro(){
-  alertErro('Erro ao efetuar login | Senha ou email inválido! Se o erro persistir tente fazer o cadastro novamente :)');
+  alertErro('Erro ao efetuar login | Senha ou email inválido! \n Se o erro persistir tente fazer o cadastro novamente :)');
 }
 
 
@@ -29,12 +29,12 @@ function pickSucesso(){
 }
 
 function pickErro(){
-  alertErro('Musica já escolhida por outro usuario :) Entre na sessão de votação e a escolha!');
+  alertErro('Musica já escolhida por outro usuario :) \n Entre na sessão de votação e a escolha!');
 }
 
 
 function votoSucesso(){
-  alertSucesso('Votado com sucesso! Lembrando que seu voto só será computado uma vez.');
+  alertSucesso('Votado com sucesso! \n Lembrando que seu voto só será computado uma vez.');
 }
 
 function votoErro(){
@@ -81,6 +81,16 @@ function alertSucesso(str){
 }
 
 
+function alertNormal(str){
+  swal({
+    text: str,
+    button: {
+      text: "Ok",
+    },
+  })
+}
+
+
 function alertErro(str){
   swal({
     text: str,
@@ -93,4 +103,8 @@ function alertErro(str){
 
 function resetSearch(){
   document.getElementById("inputSearchAll").value = '';
+}
+
+function playlistSemMusica() {
+  alertNormal('Até o momento nenhuma música foi posta nessa playlist. \n Seja o primeiro a fazer isso acessando a opção Ecolha sua Música :)')
 }
