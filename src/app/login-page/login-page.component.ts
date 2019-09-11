@@ -12,7 +12,8 @@ declare const cadastroErro: any;
 declare const loginSucesso: any;
 declare const loginErro: any;
 declare const emailEncontrado: any;
-declare const resetPass: any;
+declare const resetPassErro: any;
+declare const resetPassSucesso: any;
 
 @Component({
   selector: 'app-login-page',
@@ -81,6 +82,7 @@ export class LoginPageComponent implements OnInit {
       this.spinnerService.hide();
       loginErro();
     });
+    this.spinnerService.hide();
   }
 
   cadastroForm(form2) {
@@ -118,7 +120,7 @@ export class LoginPageComponent implements OnInit {
       }
     }, (error2) => {
       this.spinnerService.hide();
-      cadastroErro();
+      emailEncontrado(false);
     });
 
   }
@@ -205,7 +207,7 @@ export class LoginPageComponent implements OnInit {
 
   closeCadastro(form){
     form = '';
-    this.emailNovaSenha = ''
+    this.emailNovaSenha = '';
     this.cadastroState = false;
     this.loginState = true;
     this.redigiteSenhaState = false;
@@ -215,15 +217,13 @@ export class LoginPageComponent implements OnInit {
   redigiteSenhaForm(form){
     let bool = false;
     if(form.newPass !== form.reNewPass){
-      console.log("senhas nao iguais");
-      resetPass('Senhas não batem! Tente novamente');
+      resetPassErro('Senhas não batem! Tente novamente');
     }
     if(form.newPass === '' || form.reNewPass === ''){
-      console.log("senhas nao preenchidas");
-      resetPass('Senhas não preenchidas! Tente novamente');
+      resetPassErro('Senhas não preenchidas! Tente novamente');
     }
 
-    if(form.newPass === form.reNewPass){
+    if(form.newPass === form.reNewPass && form.newPass !== '' || form.reNewPass !== '' ){
       bool = true;
     }
     if(bool){
@@ -235,7 +235,7 @@ export class LoginPageComponent implements OnInit {
       this.getLoginService.updatePasswordUser(user).subscribe((data) => {
         this.spinnerService.hide();
         console.log(data);
-        resetPass('Senha trocada com sucesso!');
+        resetPassSucesso('Senha trocada com sucesso!');
         this.loginState = true;
         this.cadastroState = false;
         this.esqueceuSenhaEmailState = false;
@@ -244,12 +244,8 @@ export class LoginPageComponent implements OnInit {
 
       }, (error2) => {
         this.spinnerService.hide();
-        resetPass('Erro ao trocar senha :( Tente mais tarde');
+        resetPassErro('Erro ao trocar senha :( Tente mais tarde');
       });
     }
   }
-
-
-
-
 }

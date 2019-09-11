@@ -38,8 +38,6 @@
                                                                                            aria-owns="submenu-1-2" href="#">Hip hop</a></li>
         <li (click)="modifyStatePlaylistPick('emo')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
                                                                                                aria-owns="submenu-1-2" href="#">Emo</a></li>
-        <!--<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"-->
-        <!--aria-owns="submenu-1-1" href="#">Sale %</a></li>-->
       </ul>
       <!-- Submenu 1-1 -->
       <ul data-menu="submenu-1-1" id="submenu-1-1" class="menu__level" tabindex="-1" role="menu"
@@ -60,15 +58,13 @@
         <li (click)="modifyStatePlaylistPickView('80s')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Anos 80</a></li>
         <li (click)="modifyStatePlaylistPickView('hip-hop')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Hip hop</a></li>
         <li (click)="modifyStatePlaylistPickView('emo')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Emo</a></li>
-        <!--<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"-->
-        <!--aria-owns="submenu-1-1" href="#">Sale %</a></li>-->
       </ul>
 
     </div>
   </nav>
   <div class="content">
     <div  class="container_input_text">
-      <p class="title">{{status}}</p>
+      <p class="title" id="titulo">{{status}}</p>
       <p class="title">{{artistaSelecionado}}</p>
       <p class="subtitle">{{status2}}</p>
     </div>
@@ -77,10 +73,8 @@
     <form   #formPickSearch="ngForm" (ngSubmit)="search(formPickSearch.value)">
 
 
-    <div  class="container_input">
-      <input ngModel name="inputSearch" type="text">
-      <div class="search"></div>
-
+    <div  class="container_input_text2">
+      <input ngModel name="inputSearch" id="inputSearchAll" type="text" class="form__field" placeholder="Digite aqui..." />
     </div>
     <div class="container_input_button">
       <button type="submit" class="btn fourth">Buscar</button>
@@ -90,23 +84,29 @@
 
     </div>
 
+    <div *ngIf="openHome()" class="container_input_home">
+        <p >Bem-vindos a</p>
+        <p class="pRosa">Antes Tardis do Que Nunca</p>
+        <br>
+        <h4>Acesse ao menu ao lado e discoteque conosco!</h4>
+    </div>
+
 
 
     <!--block Escolha por Artistas-->
     <ul  *ngIf="openArtistasTable()" id="searchArtists" class="products">
       <li *ngFor="let artist of artists" class="product">
-        <div class="top">
-          <img src={{artist.photoUri}}>
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p ></p>
-            <h5>Artista</h5>
-            <p id="artistName">{{artist.name}}</p>
-            <p> <b class="votos"></b></p>
+        <div class="footer2">
+          <div class="artistDescription">
+            <div class="artistImg">
+              <img src={{artist.photoUri}}>
+            </div>
+            <div class="nomeArtista">
+            <h5>{{artist.name}}</h5>
+              </div>
           </div>
-          <div class="footer btn-center">
-            <button (click)="topTracksArtist(artist)" class="btn fourth"  >Escolher</button>
+          <div class="ok">
+            <i class="fa fa-play-circle"  style="font-size:30px;"(click)="topTracksArtist(artist)"></i>
           </div>
         </div>
       </li>
@@ -116,19 +116,14 @@
     <!--block Top Tracks Artist-->
     <ul  *ngIf="openTopTracksArtist()"  class="products">
       <li *ngFor="let music of musicsTopTracks" class="product">
-        <!--<div class="top">-->
-          <!--<img src={{music.photoUri}}>-->
-        <!--</div>-->
-        <div class="footer">
-          <div class="description">
-            <p ></p>
-            <p>{{music.name}}</p>
-            <h5>Álbum</h5>
-            <p>{{music.album}}</p>
-            <p> <b class="votos"></b></p>
-          </div>
-          <div class="footer btn-center">
-            <button (click)="showCardFinalEscolha(music)" id="escolherMusicaTopTracks" class="btn fourth">Escolher</button>
+         <div class="footer2">
+            <div class="musicDescription">
+              <h5>{{music.name}}</h5>
+              <p>{{music.album}}</p>
+            </div>
+          <div class="ok">
+            <i class="fa fa-play-circle"  style="font-size:30px;"(click)="showCardFinalEscolha(music)"></i>
+            <!--<p (click)="showCardFinalEscolha(music)">e</p>-->
           </div>
         </div>
       </li>
@@ -137,20 +132,13 @@
     <!--block Filtro Musica por artista-->
     <ul  *ngIf="openTracksArtisFilter()"  class="products">
       <li *ngFor="let music of musicsFilterArtist" class="product">
-        <!--<div class="top">-->
-          <!--<img src={{music.photoUri}}>-->
-        <!--</div>-->
-        <div class="footer">
-          <div class="description">
-            <p></p>
-            <!--<h5>Música</h5>-->
-            <p>{{music.name}}</p>
-            <h5>Álbum</h5>
+        <div class="footer2">
+          <div class="musicDescription">
+            <h5>{{music.name}}</h5>
             <p>{{music.album}}</p>
-            <p> <b class="votos"></b></p>
           </div>
-          <div class="footer btn-center">
-            <button (click)="showCardFinalEscolha(music)" id="escolherMusicaByArtist" class="btn fourth">Escolher</button>
+          <div class="ok">
+            <i class="fa fa-play-circle"  style="font-size:30px;" (click)="showCardFinalEscolha(music)"></i>
           </div>
         </div>
       </li>
@@ -159,21 +147,20 @@
     <!--block Card Final Escolha-->
     <ul *ngIf="openCardEscolha()" class="products">
       <li id="escolhaFinal" class="product">
-        <div class="top">
-          <img src="{{fotoMusicaEscolhida}}">
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p >{{artistaEscolhido}}</p>
-            <h5>Música</h5>
-            <p>{{musicEscolhida}}</p>
-            <p>Sua escolha para discotecar é essa?</p>
+        <div class="footer2">
+          <div class="voteDescription">
+            <div class="artistImg">
+              <img src={{fotoMusicaEscolhida}}>
+            </div>
+            <div class="nomeArtista">
+              <p>{{artistaEscolhido}}</p>
+              <h5>{{musicEscolhida}}</h5>
+            </div>
           </div>
-          <div class="footer btn-center">
-            <button (click)="pickSim()"  id="confirmar" class="btn fourth">Sim</button>
-            <button (click)="pickNao()"  id="cancelar" class="btn fourth">Não</button>
+          <div class="ok">
+            <i class="fa fa-check-circle"  style="font-size:40px;  margin-bottom: 10px" (click)="pickSim()"></i>
+            <i class="fa fa-times-circle"  style="font-size:40px;" (click)="pickNao()"></i>
           </div>
-
         </div>
       </li>
     </ul>
@@ -181,18 +168,19 @@
     <!--block Musics Playlists-->
     <ul *ngIf="openMusicPlaylistOpen()" class="products">
       <li *ngFor="let music of musicsPlaylists; let i = index" class="product">
-        <div class="top">
-          <img src={{music.photoUri}}>
-        </div>
-        <div class="footer">
-          <div class="description">
-            <p>{{music.artist}}</p>
-            <h5>{{music.name}}</h5>
-            <p>Ranking <b class="ranking">{{i + 1}}</b></p>
-            <p>Votos <b class="votos">{{music.likes}}</b></p>
+        <div class="footer2">
+          <div class="voteDescription">
+            <div class="artistImg">
+              <img src={{music.photoUri}}>
+            </div>
+            <div class="nomeArtista">
+              <p>{{music.artist}}</p>
+              <h5>{{music.name}}</h5>
+              <p>Votos:   <b>{{music.likes}}</b></p>
+            </div>
           </div>
-          <div class="footer btn-center">
-            <button (click)="votar(music)" id="btnVotar" class="btn fourth">Vote</button>
+          <div class="ok">
+            <i class="fa fa-play-circle"  style="font-size:40px;" (click)="votar(music)"></i>
           </div>
         </div>
       </li>
@@ -202,21 +190,21 @@
     <!--block Vote Card-->
     <ul  *ngIf="openVoteCard()"class="products">
       <li id="voteCard" class="product">
-        <div class="top">
-          <img src={{musicVotedPhotoUri}}>
-        </div>
-        <div class="footer">
-          <div class="description">
+      <div class="footer2">
+        <div class="voteDescription">
+          <div class="artistImg">
+            <img src={{musicVotedPhotoUri}}>
+          </div>
+          <div class="nomeArtista">
             <p>{{musicVotedArtist}}</p>
             <h5>{{musicVotedName}}</h5>
-            <p> Certeza que irá votar nessa música?</p>
-            <!--<p> <b class="votos">{{music.likes}}</b></p>-->
-          </div>
-          <div class="footer btn-center">
-            <button (click)="voteSim()" id="btnVotoSim" class="btn fourth">Sim</button>
-            <button (click)="voteNao()"  class="btn fourth">Não</button>
           </div>
         </div>
+        <div class="ok">
+          <i class="fa fa-check-circle"  style="font-size:40px;  margin-bottom: 10px" (click)="voteSim()"></i>
+          <i class="fa fa-times-circle"  style="font-size:40px;" (click)="voteNao()"></i>
+        </div>
+      </div>
       </li>
     </ul>
 
@@ -224,18 +212,14 @@
     <!--block Search Music-->
     <ul *ngIf="openSearchMusic()" class="products">
       <li *ngFor="let music of musicsBytrack; let i = index" class="product">
-        <div class="top">
-          <img src={{music.photoUri}}>
-        </div>
-        <div class="footer">
-          <div class="description">
+        <div class="footer2">
+          <div class="musicDescription">
             <p>{{music.artist}}</p>
             <h5>{{music.name}}</h5>
-            <p><b class="ranking"></b></p>
-            <p><b class="votos"></b></p>
+            <p>{{music.album}}</p>
           </div>
-          <div class="footer btn-center">
-            <button (click)="showCardFinalEscolha(music)"  class="btn fourth">Escolher</button>
+          <div class="ok">
+            <i class="fa fa-play-circle"  style="font-size:30px;" (click)="showCardFinalEscolha(music)"></i>
           </div>
         </div>
       </li>

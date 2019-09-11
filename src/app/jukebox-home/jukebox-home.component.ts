@@ -4,12 +4,15 @@ import {EventsService} from './../services/events/events.service';
 import {SpotifyService} from './../services/spotify/spotify.service';
 import {PlaylistService} from './../services/playlist/playlist.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+// import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 declare const run: any;
 declare const pickSucesso: any;
 declare const pickErro: any;
 declare const votoSucesso: any;
 declare const votoErro: any;
+declare const resetSearch: any;
+declare const filtroVazio: any;
 
 @Component({
   selector: 'app-jukebox-home',
@@ -49,6 +52,8 @@ export class JukeboxHomeComponent implements OnInit {
   statePlaylist = '';
   statePickPlaylist = '';
   status = '';
+  statusBackUp = '';
+  status2BackUp = '';
   status2 = '';
 
   artistaSelecionado = '';
@@ -56,7 +61,7 @@ export class JukeboxHomeComponent implements OnInit {
   //estado views
   voteCardOpen = false;
   musicPlaylistOpen = false;
-
+  homeOpen = true;
   tableByTrackOpen = false;
   topTracksArtistOpen = false;
   artistasTableOpen = false;
@@ -102,6 +107,8 @@ export class JukeboxHomeComponent implements OnInit {
     });
   }
 
+
+
   //********** chamadas service  Fim *****************
 
 
@@ -116,6 +123,8 @@ export class JukeboxHomeComponent implements OnInit {
   //Controla o estado do metodo de escolha | por musica ou por artista
 
   modifyStatePlaylistVote(pick) {
+    this.artistaSelecionado = '';
+    this.homeOpen = false;
     this.musicPlaylistOpen = false;
     this.voteCardOpen = false;
     this.musicsPlaylists = [];
@@ -168,44 +177,63 @@ export class JukeboxHomeComponent implements OnInit {
       console.log(form);
       this.spinnerService.show();
       this.getSpotifyService.getArtists(form.inputSearch).subscribe((data) => {
-        console.log(data);
-        this.spinnerService.hide();
-        this.artists = data;
-        this.artistasTableOpen = true;
+        resetSearch();
+        if(data.length === 0) {
+          this.spinnerService.hide();
+          filtroVazio();
+        }else {
+          console.log(data);
+          form.inputSearch = '';
+          this.spinnerService.hide();
+          this.artists = data;
+          this.artistasTableOpen = true;
+        }
       }, (error) => {
         this.spinnerService.hide();
-        console.log(error);
+        filtroVazio();
       });
     } else if (this.statePickPlaylist === 'artista' && this.enterTopTracks) {
       this.topTracksArtistOpen = false;
       this.enterFilter = true;
       this.spinnerService.show();
       this.getSpotifyService.getTracksFromArtist(form.inputSearch, this.artistPicked).subscribe((data) => {
+        resetSearch();
         console.log(data);
-        this.musicsFilterArtist = data;
-        this.spinnerService.hide();
-        this.trackArtistsFilter = true;
+        if(data.length === 0) {
+          this.spinnerService.hide();
+          filtroVazio();
+        }else{
+          this.musicsFilterArtist = data;
+          this.spinnerService.hide();
+          this.trackArtistsFilter = true;
+        }
       }, (error) => {
-        console.log(error);
+        filtroVazio();
         this.spinnerService.hide();
       });
     } else if (this.statePickPlaylist === 'musica'){
       this.spinnerService.show();
       this.getSpotifyService.getTracksWithoutArtists(form.inputSearch).subscribe((data) => {
+        resetSearch();
         console.log(data);
-        this.spinnerService.hide();
-        this.musicsBytrack = data;
-        this.tableByTrackOpen = true;
+        if(data.length === 0) {
+          this.spinnerService.hide();
+          filtroVazio();
+        }else {
+          this.spinnerService.hide();
+          this.musicsBytrack = data;
+          this.tableByTrackOpen = true;
+        }
       }, (error) => {
         this.spinnerService.hide();
-        console.log(error);
+        filtroVazio();
       });
     }
   }
 
   topTracksArtist(artist){
-    this.status = 'Artista Escolhido:';
-    this.artistaSelecionado =  artist.name
+    this.status = 'Artista Escolhido';
+    this.artistaSelecionado =  artist.name;
     this.status2 = 'Pesquise uma música do artista';
     this.artistPicked = artist.name;
     this.artistasTableOpen = false;
@@ -224,7 +252,12 @@ export class JukeboxHomeComponent implements OnInit {
   }
 
   showCardFinalEscolha(music){
+    this.statusBackUp = this.status;
+    this.status2BackUp = this.status2;
     this.tableByTrackOpen = false;
+    this.status = 'Sua escolha para discotecar é essa?';
+    this.status2 = '';
+    this.artistaSelecionado = '';
     console.log(this.artistPicked);
     console.log(this.statePickPlaylist);
     this.musicPicked = music;
@@ -245,7 +278,6 @@ export class JukeboxHomeComponent implements OnInit {
   }
 
   pickSim(){
-    console.log("ooooook");
     this.musicVoted = {
       artist: this.artistaEscolhido,
       music: this.musicPicked.id,
@@ -259,7 +291,11 @@ export class JukeboxHomeComponent implements OnInit {
       this.artistaEscolhido = '';
       this.musicEscolhida = '';
       this.fotoMusicaEscolhida = '';
-      console.log(data);
+      if(data.description === 'JA EXISTENTE'){
+        pickErro();
+      }else{
+        pickSucesso();
+      }
       this.topTracksArtistOpen = false;
       this.enterTopTracks = false
       this.cardEscolhaOpen = false;
@@ -269,7 +305,6 @@ export class JukeboxHomeComponent implements OnInit {
       this.modifyStatePlaylistVote(this.statePickPlaylist);
       // this.musicsTopTracks = data;
       // this.topTracksArtistOpen = true;
-      pickSucesso();
     }, (error) => {
       this.topTracksArtistOpen = false;
       this.cardEscolhaOpen = false;
@@ -287,15 +322,22 @@ export class JukeboxHomeComponent implements OnInit {
 
   pickNao(){
     if(this.enterFilter === true){
+      this.status = this.statusBackUp;
+      this.artistaSelecionado =  this.artistaEscolhido;
+      this.status2 = this.status2BackUp;
       this.searchOpen = true;
       this.trackArtistsFilter = true;
       this.cardEscolhaOpen = false;
     }if (this.enterFilter === false){
       this.searchOpen = true;
+      this.status = this.statusBackUp;
+      this.artistaSelecionado =  this.artistaEscolhido;
+      this.status2 = this.status2BackUp;
       this.trackArtistsFilter = false;
       this.topTracksArtistOpen = true;
       this.cardEscolhaOpen = false;
     }if(this.statePickPlaylist === 'musica'){
+      this.artistaSelecionado = '';
       this.cardEscolhaOpen = false;
       this.tableByTrackOpen = true;
     }
@@ -366,6 +408,15 @@ export class JukeboxHomeComponent implements OnInit {
     }
   }
 
+
+  openHome() {
+    if (this.homeOpen) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   //Abertura Top Tracks Artist Table
   openTracksArtisFilter(){
     if (this.trackArtistsFilter) {
@@ -407,8 +458,11 @@ export class JukeboxHomeComponent implements OnInit {
 
 
   modifyStatePlaylistPickView(playlist){
+    console.log('Entrou..')
+    this.homeOpen = false;
     this.status2 = '';
     this.status = 'Playlist';
+    this.artistaSelecionado = '';
     this.artistaSelecionado = playlist.toUpperCase();
     this.topTracksArtistOpen = false;
     this.tableByTrackOpen = false;
@@ -449,6 +503,8 @@ export class JukeboxHomeComponent implements OnInit {
   }
 
   votar(music){
+    this.status = 'Certeza que quer votar nessa música?'
+    this.artistaSelecionado = '';
     console.log(music);
     this.musicVotedArtist = music.artist;
     this.musicVotedId = music.music;

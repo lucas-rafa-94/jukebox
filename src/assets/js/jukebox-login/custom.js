@@ -1,59 +1,88 @@
 function cadastro(){
-  alert('Cadastro realizado com sucesso!');
+  alertSucesso('Cadastro realizado com sucesso!');
 }
 
 function cadastroErro(){
-  alert('Erro ao efetuar Cadastro');
+  alertErro('Erro ao efetuar Cadastro');
 }
 
 
 function loginSucesso(){
-  alert('Login efetuado com sucesso');
+  alertSucesso('Login efetuado com sucesso');
 }
 
 function loginErro(){
-  alert('Erro ao efetuar login | Senha ou email inválido!');
+  alertErro('Erro ao efetuar login | Senha ou email inválido!');
 }
 
 
 function pickSucesso(){
-  alert('Musica escolhida com sucesso');
+  alertSucesso('Musica escolhida com sucesso');
 }
 
 function pickErro(){
-  alert('Musica já escolhida por outro usuario');
+  alertErro('Musica já escolhida por outro usuario :) Entre na sessão de votação e a escolha!');
 }
 
 
 function votoSucesso(){
-  alert('Votado com sucesso');
+  alertSucesso('Votado com sucesso! Lembrando que seu voto só será computado uma vez');
 }
 
 function votoErro(){
-  alert('Erro ao votar');
+  alertErro('Erro ao votar');
 }
 
 function sugestaoSucesso(){
-  alert('Sucesso ao enviar sugestão :)');
+  alertSucesso('Sucesso ao enviar sugestão :)');
 }
 
 function sugestaoErro(){
-  alert('Erro ao enviar sugestão, tente mais tarde :(');
+  alertErro('Erro ao enviar sugestão, tente mais tarde :(');
 }
 
 function filtroVazio(){
-  alert('Não temos nenhum registro para essa pesquisa :(');
+  alertErro('Não temos nenhum registro para essa pesquisa :(');
 }
 
 function emailEncontrado(bool){
   if(bool){
-    alert('E-mail encontrado :)');
+    alertErro('E-mail encontrado :)')
   }else{
-    alert('E-mail não encontrado :(');
+    alertSucesso('E-mail não encontrado :( Tente fazer um novo cadastro com o mesmo');
   }
 
 }
 
-function resetPass(str){
-  alert(str)
+function resetPassSucesso(str){
+  alertSucesso(str)
+}
+
+function resetPassErro(str){
+  alertErro(str)
+}
+
+function alertSucesso(str){
+  swal({
+    text: str,
+    icon: "success",
+    button: {
+      text: "Ok",
+    },
+  })
+}
+
+
+function alertErro(str){
+  swal({
+    text: str,
+    icon: "error",
+    button: {
+      text: "Ok",
+    },
+  })
+}
+
+function resetSearch(){
+  document.getElementById("inputSearchAll").value = '';
 }

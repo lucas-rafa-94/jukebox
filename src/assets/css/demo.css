@@ -253,13 +253,13 @@ a:hover {
 
 h5 {
 	/*margin-top: -7px;*/
-	text-align: initial;
-	margin-left: 15px;
+	/*text-align: initial;*/
+	/*margin-left: 15px;*/
 }
 
 .products {
 	margin: 0;
-	padding: 2em;
+	padding: 0em;
 	text-align: center;
 }
 
@@ -547,6 +547,31 @@ body {
 	color: white;
 	opacity: 0.5;
 	font-weight: bolder;
+}
+
+
+/*.swal-footer {*/
+  /*background-color: rgb(245, 248, 250);*/
+  /*margin-top: 32px;*/
+  /*border-top: 1px solid #E9EEF1;*/
+  /*overflow: hidden;*/
+/*}*/
+
+
+.swal-button {
+  padding: 7px 19px;
+  border-radius: 2px;
+  background-color: #c81854;
+  font-size: 12px;
+  border: 1px solid #c81854;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+
+
+.swal-modal {
+  /*background-color: #101637;*/
+  background-color: white;
+  border: 3px solid #101637;
 }
 
 
