@@ -2,17 +2,25 @@ function cadastro(){
   alertSucesso('Cadastro realizado com sucesso!');
 }
 
+function emailInvalido() {
+  alertErro('E-mail inválido!');
+}
+
+function senhaInvalida() {
+  alertErro('A senha precisa ter mais que 5 caracteres!');
+}
+
 function cadastroErro(){
-  alertErro('Erro ao efetuar Cadastro');
+  alertErro('Erro ao efetuar Cadastro!');
 }
 
 
 function loginSucesso(){
-  alertSucesso('Login efetuado com sucesso');
+  alertSucesso('Login efetuado com sucesso!');
 }
 
 function loginErro(){
-  alertErro('Erro ao efetuar login | Senha ou email inválido!');
+  alertErro('Erro ao efetuar login | Senha ou email inválido! Se o erro persistir tente fazer o cadastro novamente :)');
 }
 
 
@@ -26,11 +34,11 @@ function pickErro(){
 
 
 function votoSucesso(){
-  alertSucesso('Votado com sucesso! Lembrando que seu voto só será computado uma vez');
+  alertSucesso('Votado com sucesso! Lembrando que seu voto só será computado uma vez.');
 }
 
 function votoErro(){
-  alertErro('Erro ao votar');
+  alertErro('Erro ao votar :( Tente mais tarde.');
 }
 
 function sugestaoSucesso(){
@@ -49,7 +57,7 @@ function emailEncontrado(bool){
   if(bool){
     alertSucesso('E-mail encontrado :)')
   }else{
-    alertErro('E-mail não encontrado :( Tente fazer um novo cadastro com o mesmo');
+    alertErro('E-mail não encontrado :( Tente fazer um novo cadastro com o mesmo.');
   }
 
 }

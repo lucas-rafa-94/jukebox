@@ -14,6 +14,8 @@ declare const loginErro: any;
 declare const emailEncontrado: any;
 declare const resetPassErro: any;
 declare const resetPassSucesso: any;
+declare const emailInvalido: any;
+declare const senhaInvalida: any;
 
 @Component({
   selector: 'app-login-page',
@@ -87,17 +89,29 @@ export class LoginPageComponent implements OnInit {
 
   cadastroForm(form2) {
     this.spinnerService.show();
-    this.getLoginService.createUser(form2).subscribe((data) => {
-      this.spinnerService.hide();
-      console.log(data);
-      cadastro();
-      this.loginState = true;
-      this.cadastroState = false;
+    let bool = true;
+    if(!form2.email.includes('@')){
+      emailInvalido();
+      bool = false;
+    }else if(form2.password.length <= 5){
+      bool = false;
+      senhaInvalida();
+    }
+    if(bool) {
+      this.getLoginService.createUser(form2).subscribe((data) => {
+        this.spinnerService.hide();
+        console.log(data);
+        cadastro();
+        this.loginState = true;
+        this.cadastroState = false;
 
-    }, (error2) => {
+      }, (error2) => {
+        this.spinnerService.hide();
+        cadastroErro();
+      });
+    }else{
       this.spinnerService.hide();
-      cadastroErro();
-    });
+    }
 
   }
 
@@ -223,7 +237,11 @@ export class LoginPageComponent implements OnInit {
       resetPassErro('Senhas não preenchidas! Tente novamente');
     }
 
-    if(form.newPass === form.reNewPass && form.newPass !== '' || form.reNewPass !== '' ){
+    if(form.newPass === form.reNewPass && form.newPass.length <= 5){
+      senhaInvalida();
+    }
+
+    if((form.newPass === form.reNewPass && form.newPass !== '' || form.reNewPass !== '') &&  form.newPass.length > 5){
       bool = true;
     }
     if(bool){
