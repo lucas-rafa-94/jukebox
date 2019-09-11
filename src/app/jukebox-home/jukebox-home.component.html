@@ -94,7 +94,8 @@
 
 
     <!--block Escolha por Artistas-->
-    <ul  *ngIf="openArtistasTable()" id="searchArtists" class="products">
+
+    <ul *ngIf="openArtistasTable()"  id="searchArtists" class="products">
       <li *ngFor="let artist of artists" class="product">
         <div class="footer2">
           <div class="artistDescription">
@@ -113,8 +114,15 @@
     </ul>
 
 
+
     <!--block Top Tracks Artist-->
-    <ul  *ngIf="openTopTracksArtist()"  class="products">
+  <div *ngIf="openTopTracksArtist()">
+    <div  class="container_input_text">
+      <p class="title" style="font-weight: bold">Top Tracks do Spotify</p>
+      <h5 class="title" style="font-weight: normal; margin-left: 0px; font-size: 12px; text-align: center">Sua música não está no top 10?</h5>
+      <h5 class="title" style="font-weight: normal; margin-left: 0px; font-size: 10px; margin-top: 10px; text-align: center; margin-bottom: 20px">Busque na barra de pesquisa acima :)</h5>
+    </div>
+    <ul    class="products">
       <li *ngFor="let music of musicsTopTracks" class="product">
          <div class="footer2">
             <div class="musicDescription">
@@ -128,6 +136,7 @@
         </div>
       </li>
     </ul>
+  </div>
 
     <!--block Filtro Musica por artista-->
     <ul  *ngIf="openTracksArtisFilter()"  class="products">
