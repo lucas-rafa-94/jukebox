@@ -1307,9 +1307,9 @@ strong{
 }
 
 @media (min-width: 320px){
-  /*.products{*/
-    /*margin-left: -2.1rem;*/
-  /*}*/
+  .products{
+    /*margin-left: 5px;*/
+  }
   #buscar{
     margin-left: 5rem;
     margin-top: 10px;
@@ -1331,9 +1331,9 @@ strong{
 
 
 @media (min-width: 330px){
-  /*.products{*/
-    /*margin-left: -1.9rem;*/
-  /*}*/
+  .products{
+    margin-left: 6px;
+  }
   #buscar{
     margin-left: 5rem;
     margin-top: 10px;

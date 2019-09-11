@@ -47,9 +47,9 @@ function filtroVazio(){
 
 function emailEncontrado(bool){
   if(bool){
-    alertErro('E-mail encontrado :)')
+    alertSucesso('E-mail encontrado :)')
   }else{
-    alertSucesso('E-mail não encontrado :( Tente fazer um novo cadastro com o mesmo');
+    alertErro('E-mail não encontrado :( Tente fazer um novo cadastro com o mesmo');
   }
 
 }
