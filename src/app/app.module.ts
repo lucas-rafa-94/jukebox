@@ -17,7 +17,7 @@ import {DynamicScriptLoaderService} from './services/dynamicScriptLoader/dynamic
 
 const routes: Routes = [
   {path: '', component: LoginPageComponent},
-  {path: 'jukebox', component: JukeboxHomeComponent}];
+  {path: 'index.html', component: JukeboxHomeComponent}];
 
 const config = new AuthServiceConfig([
   // {

@@ -14,9 +14,9 @@ export class AppComponent {
   getToken() {
     if (localStorage.getItem('currentToken') !== '') {
       console.log('entrou ++++');
-      this.router.navigate(['']);
+      this.router.navigate(['index.html']);
     }else{
-      this.router.navigate(['/login']);
+      this.router.navigate(['']);
     }
   }
 }

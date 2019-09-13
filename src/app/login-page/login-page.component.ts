@@ -54,7 +54,7 @@ export class LoginPageComponent implements OnInit {
   getTokenSession() {
     console.log(localStorage.getItem('email'));
     if (localStorage.getItem('email') &&  localStorage.getItem('email') !== '') {
-      this.router.navigate(['/jukebox']);
+      this.router.navigate(['index.html']);
     }
   }
 
