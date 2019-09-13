@@ -16,8 +16,6 @@ import {JukeboxHomeComponent} from './jukebox-home/jukebox-home.component';
 import {DynamicScriptLoaderService} from './services/dynamicScriptLoader/dynamic-script-loader.service';
 
 const routes: Routes = [
-  {path: 'login', component: LoginPageComponent},
-  {path: '', component: LoginPageComponent},
   {path: '', component: LoginPageComponent},
   {path: 'jukebox', component: JukeboxHomeComponent}];
 

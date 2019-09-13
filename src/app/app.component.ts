@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'jukebox';
+
+  constructor(private router: Router) { this.getToken(); }
+
+  getToken() {
+    if (localStorage.getItem('currentToken') !== '') {
+      console.log('entrou ++++');
+      this.router.navigate(['']);
+    }else{
+      this.router.navigate(['/login']);
+    }
+  }
 }
