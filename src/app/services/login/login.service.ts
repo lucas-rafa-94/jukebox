@@ -6,8 +6,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class LoginService {
 
-  // url = 'http://jukebox-lab151.com.br:8080/user';
-  url = 'http://localhost:8080/user';
+  url = 'http://jukebox-lab151.com.br:8080/user';
+  // url = 'http://localhost:8080/user';
   constructor(private http: HttpClient) { }
 
   // Responsavel por logar usuario cadastrado
