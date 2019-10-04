@@ -647,7 +647,7 @@ export class JukeboxHomeComponent implements OnInit {
       votoSucesso();
       this.voteCardOpen = false;
       this.musicPlaylistOpen = true;
-      this.modifyStatePlaylistPickView(this.statePickPlaylist);
+      this.modifyStatePlaylistPickView();
       // this.topTracksArtistOpen = true;
     }, (error) => {
       console.log(error);
@@ -659,7 +659,7 @@ export class JukeboxHomeComponent implements OnInit {
   voteNao() {
     this.voteCardOpen = false;
     this.musicPlaylistOpen = true;
-    this.modifyStatePlaylistPickView(this.statePickPlaylist);
+    this.modifyStatePlaylistPickView();
   }
 
   openMusicPlaylistOpen(){
