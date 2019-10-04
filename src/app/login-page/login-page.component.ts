@@ -17,6 +17,7 @@ declare const resetPassSucesso: any;
 declare const emailInvalido: any;
 declare const senhaInvalida: any;
 
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',

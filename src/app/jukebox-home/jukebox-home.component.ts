@@ -12,7 +12,6 @@ declare const pickSucesso: any;
 declare const pickErro: any;
 declare const votoSucesso: any;
 declare const votoErro: any;
-declare const resetSearch: any;
 declare const filtroVazio: any;
 declare const playlistSemMusica: any;
 declare const sugestaoEnviada: any;
@@ -64,8 +63,6 @@ export class JukeboxHomeComponent implements OnInit {
   statePlaylist = '';
   statePickPlaylist = '';
   status = '';
-  statusBackUp = '';
-  status2BackUp = '';
   status2 = '';
 
   artistaSelecionado = '';
