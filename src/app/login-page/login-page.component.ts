@@ -73,7 +73,7 @@ export class LoginPageComponent implements OnInit {
           this.spinnerService.hide();
           localStorage.setItem('email', form.email);
           console.log(data2);
-          this.router.navigate(['jukebox']);
+          this.router.navigate(['index.html']);
           loginSucesso();
         }, (error2) => {
           this.spinnerService.hide();
@@ -144,7 +144,7 @@ export class LoginPageComponent implements OnInit {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
     console.log(this.user.email);
     console.log(this.user.name);
-    this.router.navigate(['jukebox']);
+    this.router.navigate(['index.html']);
   }
 
   loginOpen(){

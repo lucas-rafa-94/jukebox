@@ -4,13 +4,13 @@
 
   <header class="bp-header cf">
     <div class="dummy-logo">
-      <img src="assets/img/an.png" style="height: 60px; width: 60px">
-      <h2 class="dummy-heading">Antes Tardis</h2>
+      <img src="assets/img/jukebox_logo.png" style="height: 60px; width: 60px">
+      <h2 class="dummy-heading">Jukebox Party</h2>
     </div>
     <div class="bp-header__main">
       <span class="bp-header__present">lab151</span>
-      <img src="assets/img/an.png" style="height: 60px; width: 60px">
-      <h1 class="bp-header__title">Antes Tardis</h1>
+      <img src="assets/img/jukebox_logo.png" style="height: 60px; width: 60px">
+      <h1 class="bp-header__title">Jukebox Party</h1>
     </div>
   </header>
   <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
@@ -18,47 +18,41 @@
     <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
     <div class="menu__wrap">
       <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="Todos">
-        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-2" aria-owns="submenu-2" href="#">Votação</a></li>
-        <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Escolha sua música</a></li>
+        <li class="menu__item" role="menuitem"><a class="menu__link" (click)="limpar()" data-submenu="submenu-1" aria-owns="submenu-1" href="#">Escolha sua música</a></li>
+        <li class="menu__item" role="menuitem"><a class="menu__link" (click)="modifyStatePlaylistPickView('rock')" href="#">Votação</a></li>
+        <li class="menu__item" role="menuitem"><a class="menu__link" (click)="abrirNaoEncontrou()" href="#">Não achou sua música?</a></li>
+        <li class="menu__item" role="menuitem"><a class="menu__link" (click)="getHomeOpen()" href="#">As 10 mais votadas até o momento</a></li>
       </ul>
       <!-- Submenu 1 -->
       <ul  data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu"
           aria-label="votacao">
-        <li (click)="modifyStatePlaylistPick('rock')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
-                                                  aria-owns="submenu-1-1" href="#">Rock</a></li>
-        <li (click)="modifyStatePlaylistPick('pop')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
-                                                  aria-owns="submenu-1-1" href="#">Pop</a></li>
-        <li (click)="modifyStatePlaylistPick('indie')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
-                                                  aria-owns="submenu-1-2" href="#">Indie</a></li>
-        <li (click)="modifyStatePlaylistPick('funk')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
-                                                                                             aria-owns="submenu-1-2" href="#">Funk</a></li>
-        <li (click)="modifyStatePlaylistPick('80s')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
-                                                                                            aria-owns="submenu-1-2" href="#">Anos 80</a></li>
-        <li (click)="modifyStatePlaylistPick('hip-hop')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
-                                                                                           aria-owns="submenu-1-2" href="#">Hip hop</a></li>
-        <li (click)="modifyStatePlaylistPick('emo')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"
-                                                                                               aria-owns="submenu-1-2" href="#">Emo</a></li>
+        <li (click)="modifyStatePlaylistVote('artista')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Por artista</a></li>
+        <li (click)="modifyStatePlaylistVote('musica')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Por música</a></li>
+        <!--<li (click)="modifyStatePlaylistPick('funk')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"-->
+                                                                                             <!--aria-owns="submenu-1-2" href="#">Funk</a></li>-->
+        <!--<li (click)="modifyStatePlaylistPick('hip-hop')" class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1-1"-->
+        <!--aria-owns="submenu-1-2" href="#">Rap</a></li>-->
       </ul>
       <!-- Submenu 1-1 -->
-      <ul data-menu="submenu-1-1" id="submenu-1-1" class="menu__level" tabindex="-1" role="menu"
-          aria-label="Sale %">
-        <li class="menu__item" (click)="modifyStatePlaylistVote('artista')" role="menuitem"><a class="menu__link" href="#">Por artista</a></li>
-        <li class="menu__item" (click)="modifyStatePlaylistVote('musica')" role="menuitem"><a class="menu__link" href="#">Por música</a></li>
-      </ul>
+      <!--<ul data-menu="submenu-1-1" id="submenu-1-1" class="menu__level" tabindex="-1" role="menu"-->
+          <!--aria-label="Sale %">-->
+        <!--<li class="menu__item" (click)="modifyStatePlaylistVote('artista')" role="menuitem"><a class="menu__link" href="#">Por artista</a></li>-->
+        <!--<li class="menu__item" (click)="modifyStatePlaylistVote('musica')" role="menuitem"><a class="menu__link" href="#">Por música</a></li>-->
+      <!--</ul>-->
 
 
       <!-- Submenu 2 -->
-      <ul data-menu="submenu-2" id="submenu-2" class="menu__level" tabindex="-1" role="menu"
-          aria-label="escolha-uma-musica">
+      <!--<ul data-menu="submenu-2" id="submenu-2" class="menu__level" tabindex="-1" role="menu"-->
+          <!--aria-label="escolha-uma-musica">-->
 
-        <li (click)="modifyStatePlaylistPickView('rock')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Rock</a></li>
-        <li (click)="modifyStatePlaylistPickView('indie')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Indie</a></li>
-        <li (click)="modifyStatePlaylistPickView('pop')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Pop</a></li>
-        <li (click)="modifyStatePlaylistPickView('funk')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Funk</a></li>
-        <li (click)="modifyStatePlaylistPickView('80s')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Anos 80</a></li>
-        <li (click)="modifyStatePlaylistPickView('hip-hop')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Hip hop</a></li>
-        <li (click)="modifyStatePlaylistPickView('emo')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Emo</a></li>
-      </ul>
+        <!--<li (click)="modifyStatePlaylistPickView('rock')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Rock|Emo|Indie</a></li>-->
+
+        <!--<li (click)="modifyStatePlaylistPickView('pop')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Pop|Funk|Pop|Hip-Hop|Rap</a></li>-->
+        <!--&lt;!&ndash;<li (click)="modifyStatePlaylistPickView('funk')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Funk</a></li>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;<li (click)="modifyStatePlaylistPickView('hip-hop')" class="menu__item" role="menuitem"><a class="menu__link" href="#">Rap</a></li>&ndash;&gt;-->
+
+      <!--</ul>-->
 
     </div>
   </nav>
@@ -84,12 +78,26 @@
 
     </div>
 
-    <div *ngIf="openHome()" class="container_input_home">
-        <p >Bem-vindos a</p>
-        <p class="pRosa">Antes Tardis do Que Nunca</p>
-        <br>
-        <h4>Acesse o menu ao lado e discoteque conosco!</h4>
+
+    <div *ngIf="openNaoEncontrou()">
+
+      <form   #formSugestao="ngForm"  (ngSubmit)="postSugestao(formSugestao.value)">
+
+
+        <div  class="container_input_text2">
+          <input ngModel name="inputText" id="sugestao" type="text" class="form__field" placeholder="Digite aqui..." />
+        </div>
+
+
+        <div class="container_input_button">
+          <button type="submit" class="btn fourth">Enviar</button>
+        </div>
+
+      </form>
+
+
     </div>
+
 
 
 
@@ -100,7 +108,7 @@
         <div class="footer2">
           <div class="artistDescription">
             <div class="artistImg">
-              <img src={{artist.photoUri}}>
+              <img src={{artist.uriImage}}>
             </div>
             <div class="nomeArtista">
             <h5>{{artist.name}}</h5>
@@ -117,16 +125,11 @@
 
     <!--block Top Tracks Artist-->
   <div *ngIf="openTopTracksArtist()">
-    <div  class="container_input_text">
-      <p class="title" style="font-weight: bold">Top Tracks do Spotify</p>
-      <h5 class="title" style="font-weight: normal; margin-left: 0px; font-size: 18px; text-align: center">Sua música não está no top 10?</h5>
-      <h5 class="title" style="font-weight: normal; margin-left: 0px; font-size: 16px; margin-top: 10px; text-align: initial; margin-bottom: 20px">Busque na barra de pesquisa acima :)</h5>
-    </div>
     <ul    class="products">
       <li *ngFor="let music of musicsTopTracks" class="product">
          <div class="footer2">
             <div class="musicDescription">
-              <h5>{{music.name}}</h5>
+              <h5>{{music.music}}</h5>
               <p>{{music.album}}</p>
             </div>
           <div class="ok">
@@ -143,7 +146,7 @@
       <li *ngFor="let music of musicsFilterArtist" class="product">
         <div class="footer2">
           <div class="musicDescription">
-            <h5>{{music.name}}</h5>
+            <h5>{{music.music}}</h5>
             <p>{{music.album}}</p>
           </div>
           <div class="ok">
@@ -224,8 +227,8 @@
         <div class="footer2">
           <div class="musicDescription">
             <p>{{music.artist}}</p>
-            <h5>{{music.name}}</h5>
-            <p>{{music.album}}</p>
+            <h5>{{music.music}}</h5>
+            <!--<p>{{music.album}}</p>-->
           </div>
           <div class="ok">
             <i class="fa fa-play-circle"  style="font-size:30px;" (click)="showCardFinalEscolha(music)"></i>
@@ -234,6 +237,27 @@
       </li>
     </ul>
 
+
+
+      <ul *ngIf="openHome()" class="products">
+        <li *ngFor="let music of musicsPlaylists; let i = index" class="product">
+          <div class="footer2">
+            <div class="voteDescription">
+              <div class="artistImg">
+                <img src={{music.photoUri}}>
+              </div>
+              <div class="nomeArtista">
+                <p>{{music.artist}}</p>
+                <h5>{{music.name}}</h5>
+                <p>Votos:   <b>{{music.likes}}</b></p>
+              </div>
+            </div>
+            <div class="ok">
+              <i>{{i+1}}°</i>
+            </div>
+          </div>
+        </li>
+      </ul>
 
   </div>
 </div>

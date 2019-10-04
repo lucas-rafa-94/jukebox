@@ -6,8 +6,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class PlaylistService {
   // url = 'https://umcincoumproducoes.herokuapp.com';
-  // url = 'http://localhost:8080';
-  url = 'http://jukebox-lab151.com.br:8080';
+  url = 'http://localhost:8080';
+  // url = 'http://jukebox-lab151.com.br:8080';
   constructor(private http: HttpClient) { }
 
   putMusicOnPlaylist(playlist, payload) {
@@ -20,6 +20,12 @@ export class PlaylistService {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
     return this.http.get(this.url + '/playlist/jukebox' + playlist,{headers});
+  }
+
+  getMusicsOnPlaylistTop10() {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    return this.http.get(this.url + '/playlist/top-10',{headers});
   }
 
   voteMusicsOnPlaylist(playlist, email, music) {

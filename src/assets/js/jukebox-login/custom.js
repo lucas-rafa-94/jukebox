@@ -101,8 +101,21 @@ function alertErro(str){
   })
 }
 
+function sugestaoEnviada(bool){
+  if(bool){
+    alertSucesso('Sugestão enviada com sucesso :)')
+  }else{
+    alertErro('Erro na tentativa do envio :( Por favor, tente mais tarde.');
+  }
+
+}
+
 function resetSearch(){
   document.getElementById("inputSearchAll").value = '';
+}
+
+function resetSugestao(){
+  document.getElementById("sugestao").value = '';
 }
 
 function playlistSemMusica() {
